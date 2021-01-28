@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="8f56e723-2189-4aef-815a-d976962bfda4" name="gncdocs" url="http://localhost">
+        <fileTransfer port="0" mountedRoot="C:\Users\erjkj\PycharmProjects\gncdocs" accessType="MOUNT" />
+      </webServer>
+    </option>
+  </component>
+</project>
