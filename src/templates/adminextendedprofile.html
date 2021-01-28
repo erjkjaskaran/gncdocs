@@ -1,0 +1,234 @@
+{% extends "base2.html" %}
+{% block content%}
+
+    <div class="limiter">
+      <div class="container-login100">
+          <div class="accordion space-20 container-fluid" id="parent11Accordion">
+                    <button class="accordion-button" id="heading11" type="button" data-bs-toggle="collapse" data-bs-target="#collapse11" aria-expanded="false" aria-controls="collapse11">
+                        <strong>1.1</strong> Number of courses offered by the Institution across all programs during the last five years
+                    </button>
+                    <div id="collapse11" class="accordion-collapse collapse container-fluid" aria-labelledby="heading11" data-bs-parent="#parent11Accordion">
+                        <div class="accordion-body">
+                            <div class="container-fluid border" >
+                                <form action="/ext1.1" method="POST" enctype = "multipart/form-data">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead class="grey lighten-2">
+                                                <tr>
+                                                    <th class="w-20">Program Code</th>
+                                                    <th class="w-20">Program Name</th>
+                                                    <th class="w-20">Course Code</th>
+                                                    <th class="w-20">Course Name</th>
+                                                    <th class="w-20">Year of Introduction</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><input class="form-control" id="programcode" name="programcode" type="text"></td>
+                                                    <td><input class="form-control" id="programname" name="programname" type="text"></td>
+                                                    <td><input class="form-control" id="coursecode" name="coursecode" type="text"></td>
+                                                    <td><input class="form-control" id="coursename" name="coursename" type="text"></td>
+                                                    <td><input class="form-control" id="yearofintroduction" name="yearofintroduction" type="text"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="container-fluid">
+                                        <button class="login100-form-btn w-25">SUBMIT</button>
+                                    </div>
+                                </form>
+                                <div class="table-responsive" >
+                                    <table class="table">
+                                        <thead class="grey lighten-2">
+                                                <tr>
+                                                    <th class="w-20">Program Code</th>
+                                                    <th class="w-20">Program Name</th>
+                                                    <th class="w-20">Course Code</th>
+                                                    <th class="w-20">Course Name</th>
+                                                    <th class="w-20">Year of Introduction</th>
+                                                    <th>Delete</th>
+                                                </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for dataset in dataset2%}
+                                            <tr>
+                                                <td>{{dataset['pcode']}}</td>
+                                                <td>{{dataset['pname']}}</td>
+                                                <td>{{dataset['ccode']}}</td>
+                                                <td>{{dataset['cname']}}</td>
+                                                <td>{{dataset['yoi']}}</td>
+                                                <td><a href="delext11/{{dataset['ccode']}}"><i class="material-icons" style="font-size:24px;color:red">delete</i></a></td>
+                                            </tr>
+                                        {%endfor%}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+          </div>
+          <p> </p>
+          <div class="accordion space-20 container-fluid" id="parent22Accordion">
+                    <button class="accordion-button" id="heading22" type="button" data-bs-toggle="collapse" data-bs-target="#collapse22" aria-expanded="false" aria-controls="collapse22">
+                        <strong>2.2</strong> Number of seats earmarked for reserved category as per GOI/ State Govt rule year wise during last five years
+                    </button>
+                    <div id="collapse22" class="accordion-collapse collapse container-fluid" aria-labelledby="heading22" data-bs-parent="#parent22Accordion">
+                        <div class="accordion-body">
+                            <div class="container-fluid border" >
+                                <form action="/ext2.2" method="POST" enctype = "multipart/form-data">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead class="grey lighten-2">
+                                                <tr>
+                                                    <th class="w-25">Year</th>
+                                                    <th class="w-50">Number of seats earmarked for reserved category as per GOI/ State Govt rule</th>
+                                                    <th class="w-25">Upload Supporting Documents</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <select class="selectpicker form-control" id="year" name="year">
+                                                            <option>Select</option>
+                                                            {%if data!='None'%}
+                                                                {% set ls=[]%}
+                                                                {% for data in data %}
+                                                                {{ls.append(data['year']|int) }}
+                                                                {%endfor%}
+                                                                {%for i in range(2015,2030)%}
+                                                                {% if i not in ls %}
+                                                                <option>{{i}}</option>
+                                                                {% endif %}
+                                                                {%endfor%}
+                                                            {%endif%}
+                                                        </select>
+                                                    </td>
+                                                    <td><input class="form-control" id="numberseat" name="numberseat" type="text"></td>
+                                                    <td><input type="file" class="form-control-file border" id="document" name="document"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="container-fluid">
+                                        <button class="login100-form-btn w-25">SUBMIT</button>
+                                    </div>
+                                </form>
+                                    {% if dataset != 'None' %}
+                                    <div class="table-responsive" >
+                                        <table class="table">
+                                            <thead class="grey lighten-2">
+                                                    <tr>
+                                                        <th class="w-25">Year</th>
+                                                        <th class="w-50">Number of seats earmarked for reserved category as per GOI/ State Govt rule</th>
+                                                        <th class="w-25">Documents Uploaded</th>
+                                                        <th>Delete</th>
+                                                    </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for dataset in dataset%}
+                                                <tr>
+                                                    <td>{{dataset['year']}}</td>
+                                                    <td>{{dataset['numberseat']}}</td>
+                                                    <td><a href="static/files/ext22/{{dataset.file}}" ><i class="fa fa-file-pdf-o" style="color:red;font-size:24px;"></i></a></td>
+                                                    <td><a href="delext22/{{dataset['year']}}"><i class="material-icons" style="font-size:24px;color:red">delete</i></a></td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    {%endif%}
+
+                            </div>
+                        </div>
+                    </div>
+          </div>
+          <p> </p>
+          <div class="accordion space-20 container-fluid" id="parent32Accordion">
+                    <button class="accordion-button" id="heading32" type="button" data-bs-toggle="collapse" data-bs-target="#collapse32" aria-expanded="false" aria-controls="collapse32">
+                        <strong>3.2</strong> Number of sanctioned posts year wise during the last five years
+                    </button>
+                    <div id="collapse32" class="accordion-collapse collapse container-fluid" aria-labelledby="heading32" data-bs-parent="#parent32Accordion">
+                        <div class="accordion-body">
+                            <div class="container-fluid border" >
+                                <form action="/ext3.2" method="POST" enctype = "multipart/form-data">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead class="grey lighten-2">
+                                                <tr>
+                                                    <th class="w-25">Year</th>
+                                                    <th class="w-50">Number of Sanctioned Posts</th>
+                                                    <th class="w-25">Upload Supporting Documents</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <select class="selectpicker form-control" name="year">
+                                                            <option>Select</option>
+                                                            {% set ls=[]%}
+                                                            {% for data1 in data1 %}
+                                                            {{ls.append(data1['year']|int) }}
+                                                            {%endfor%}
+                                                            {%for i in range(2015,2030)%}
+                                                            {% if i not in ls %}
+                                                            <option>{{i}}</option>
+                                                            {% endif %}
+                                                            {%endfor%}
+                                                        </select>
+                                                    </td>
+                                                    <td><input class="form-control" name="numberpost" type="text"></td>
+                                                    <td><input type="file" class="form-control-file border" name="document"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="container-fluid">
+                                        <button class="login100-form-btn w-25">SUBMIT</button>
+                                    </div>
+                                </form>
+                                    {% if dataset1 != 'None' %}
+                                    <div class="table-responsive" >
+                                        <table class="table">
+                                            <thead class="grey lighten-2">
+                                                    <tr>
+                                                        <th class="w-25">Year</th>
+                                                        <th class="w-50">Number of Sanctioned Posts</th>
+                                                        <th class="w-25">Documents Uploaded</th>
+                                                        <th> Delete</th>
+                                                    </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for dataset in dataset1%}
+                                                <tr>
+                                                    <td>{{dataset['year']}}</td>
+                                                    <td>{{dataset['numberpost']}}</td>
+                                                    <td><a href="static/files/ext32/{{dataset.file}}" ><i class="fa fa-file-pdf-o" style="color:red;font-size:24px;"></i></a></td>
+                                                    <td><a href="/delext32/{{dataset['year']}}"><i class="material-icons" style="font-size:24px;color:red">delete</i></a></td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    {%endif%}
+
+                            </div>
+                        </div>
+                    </div>
+          </div>
+
+
+      </div>
+
+    </div>
+    <script src="{{ url_for('static',filename='vendor/jquery/jquery-3.2.1.min.js')}}"></script>
+
+	<script src="{{ url_for('static',filename='vendor/bootstrap/js/popper.js') }}"></script>
+	<script src="{{ url_for('static',filename='vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+
+	<script src="{{ url_for('static',filename='vendor/select2/select2.min.js') }}"></script>
+
+	<script src="{{ url_for('static',filename='vendor/tilt/tilt.jquery.min.js') }}"></script>
+
+
+	<script src="{{ url_for('static',filename='js/main.js') }}"></script>
+{%endblock%}

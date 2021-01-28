@@ -1,0 +1,48 @@
+{% extends "base2.html" %}
+{% block content%}
+
+    <div class="limiter">
+      <div class="container-login100">
+          <div class="space-20">
+              <a href="/extendedprofile">Extended Profile </a></div>
+          <div class="space-20">
+          <a href="/criteria1">
+              Criterion 1: Curricular Aspects </a></div>
+          <div class="space-20">
+          <a href="/criteria2">
+              Criterion 2: Teaching- Learning and Evaluation </a></div>
+          <div class="space-20">
+          <a href="/criteria3">
+              Criterion 3: Research, Innovations and Extension </a></div>
+          <div class="space-20">
+          <a href="/criteria4">
+              Criterion 4: Infrastructure and Learning Resources </a></div>
+          <div class="space-20">
+          <a href="/criteria5">
+               Criterion 5: Student Support and Progression </a></div>
+          <div class="space-20">
+          <a href="/criteria6">
+              Criterion 6: Governance, Leadership and Management </a></div>
+          <div class="space-20">
+          <a href="/criteria7">
+              Criterion 7: Institutional Values and Best Practices </a></div>
+
+      </div>
+
+      </div>
+    <script src="{{ url_for('static',filename='vendor/jquery/jquery-3.2.1.min.js')}}"></script>
+
+	<script src="{{ url_for('static',filename='vendor/bootstrap/js/popper.js') }}"></script>
+	<script src="{{ url_for('static',filename='vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+
+	<script src="{{ url_for('static',filename='vendor/select2/select2.min.js') }}"></script>
+
+	<script src="{{ url_for('static',filename='vendor/tilt/tilt.jquery.min.js') }}"></script>
+	<script >
+		$('.js-tilt').tilt({
+			scale: 1.1
+		})
+	</script>
+
+	<script src="{{ url_for('static',filename='js/main.js') }}"></script>
+{% endblock%}

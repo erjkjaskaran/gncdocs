@@ -1,0 +1,819 @@
+{% extends "base2.html" %}
+{% block content%}
+
+    <div class="limiter">
+      <div class="container-login100" style="justify-content: space-between;">
+          <div class="accordion space-20 container-fluid my-2" id="parent11Accordion">
+                    <button class="accordion-button" id="heading11" type="button" data-bs-toggle="collapse" data-bs-target="#collapse11" aria-expanded="false" aria-controls="collapse11">
+                        <strong>1.1 & 1.2</strong> Number of courses offered by the Institution across all programs during the last five years
+                    </button>
+                    <div id="collapse11" class="accordion-collapse collapse container-fluid mt-2" aria-labelledby="heading11" data-bs-parent="#parent11Accordion">
+                        <div class="accordion-body">
+                            <div class="container-fluid border" >
+
+                                <form action="/ext1.1" method="POST" enctype = "multipart/form-data">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead class="grey lighten-2">
+                                                <tr>
+                                                    <th class="w-20">Program Code</th>
+                                                    <th class="w-20">Program Name</th>
+                                                    <th class="w-20">Course Code</th>
+                                                    <th class="w-20">Course Name</th>
+                                                    <th class="w-20">Year of Introduction</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><input class="form-control" id="programcode" name="programcode" type="text"></td>
+                                                    <td><input class="form-control" id="programname" name="programname" type="text"></td>
+                                                    <td><input class="form-control" id="coursecode" name="coursecode" type="text"></td>
+                                                    <td><input class="form-control" id="coursename" name="coursename" type="text"></td>
+                                                    <td><input class="form-control" id="yearofintroduction" name="yearofintroduction" type="text"></td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="container-fluid pb-2">
+                                        <button class="login100-form-btn w-25">SUBMIT</button>
+                                    </div>
+                                </form>
+
+                                <form action="/ext1.1f" method="POST" enctype = "multipart/form-data">
+                                    <table class="table">
+                                    <tr>
+                                        <td colspan="2">Upload List of Courses specified on Letter Head duly signed by Principal</td>
+                                        <td colspan="2"><input type="file" class="form-control-file border" id="doc11" name="doc11"></td>
+                                        <td colspan="1"><button class="login100-form-btn w-100">SUBMIT</button></td>
+                                    </tr>
+                                    </table>
+                                </form>
+                                <form action="/ext1.2f" method="POST" enctype = "multipart/form-data">
+                                    <table class="table">
+                                    <tr>
+                                        <td colspan="2">Upload List of Programmes specified on Letter Head duly signed by Principal</td>
+                                        <td colspan="2"><input type="file" class="form-control-file border" id="doc12" name="doc12"></td>
+                                        <td colspan="1"><button class="login100-form-btn w-100">SUBMIT</button></td>
+                                    </tr>
+                                    </table>
+                                </form>
+
+
+                                    <div class="table-responsive" >
+                                        <table class="table">
+                                            <thead class="grey lighten-2">
+                                                    <tr>
+                                                        <th class="w-20">Program Code</th>
+                                                        <th class="w-20">Program Name</th>
+                                                        <th class="w-20">Course Code</th>
+                                                        <th class="w-20">Course Name</th>
+                                                        <th class="w-20">Year of Introduction</th>
+                                                        {%if seskey['type']=='admin'%}
+                                                        <th>Delete</th>{%endif%}
+                                                    </tr>
+                                            </thead>
+
+
+                                            <tbody>
+                                            {%if dataset2.count()!=0%}
+                                            {% for dataset in dataset2%}
+                                                <tr>
+                                                    <td>{{dataset['pcode']}}</td>
+                                                    <td>{{dataset['pname']}}</td>
+                                                    <td>{{dataset['ccode']}}</td>
+                                                    <td>{{dataset['cname']}}</td>
+                                                    <td>{{dataset['yoi']}}</td>
+                                                    {%if seskey['type']=='admin'%}
+                                                    <td><a href="delext11/{{dataset['ccode']}}"><i class="material-icons" style="font-size:24px;color:red">delete</i></a></td>{%endif%}
+                                                </tr>
+                                            {% endfor %}
+                                            {%else%}
+                                            <tr>
+                                                <td colspan="5" style="color:red; text-align:center">No data uploaded</td>
+                                            </tr>
+                                            {%endif%}
+                                            <tr>
+                                                <td colspan="4">List of Courses specified on Letter Head duly signed by Principal</td>
+                                                {%if data11.count()!=0%}
+                                                    {%for data in data11%}
+                                                    <td colspan="1" style="color:red; text-align:center"><a href="static/files/ext11/{{data.file}}" ><i class="fa fa-file-pdf-o" style="color:red;font-size:24px;"></i></a></td>
+                                                    {%if seskey['type']=='admin'%}
+                                                    <td colspan="1" style="color:red; text-align:center"><a href="delext11f/{{data['file']}}"><i class="material-icons" style="font-size:24px;color:red">delete</i></a></td>{%endif%}
+                                                    {%endfor%}
+                                                {%else%}
+                                                    <td colspan="2" style="color:red; text-align:center">No File Uploaded</td>
+                                                {%endif%}
+                                            </tr>
+                                            <tr>
+                                                <td colspan="4">List of Programmes specified on Letter Head duly signed by Principal</td>
+                                                {%if data12.count()!=0%}
+                                                    {%for data in data12%}
+                                                    <td colspan="1" style="color:red; text-align:center"><a href="static/files/ext12/{{data.file}}" ><i class="fa fa-file-pdf-o" style="color:red;font-size:24px;"></i></a></td>
+                                                    {%if seskey['type']=='admin'%}
+                                                    <td colspan="1" style="color:red; text-align:center"><a href="delext12f/{{data['file']}}"><i class="material-icons" style="font-size:24px;color:red">delete</i></a></td>{%endif%}
+                                                {%endfor%}
+                                                {%else%}
+                                                    <td colspan="2" style="color:red; text-align:center">No File Uploaded</td>
+                                                {%endif%}
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+          </div>
+          <div class="accordion space-20 container-fluid my-2" id="parent21Accordion">
+                    <button class="accordion-button" id="heading21" type="button" data-bs-toggle="collapse" data-bs-target="#collapse21" aria-expanded="false" aria-controls="collapse21">
+                        <strong>2.1</strong> Number of students enrolled year wise during the last five years
+                    </button>
+                    <div id="collapse21" class="accordion-collapse collapse container-fluid mt-2" aria-labelledby="heading21" data-bs-parent="#parent21Accordion">
+                        <div class="accordion-body">
+                            <div class="container-fluid border" >
+                                <form action="/ext2.1" method="POST" enctype = "multipart/form-data">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead class="grey lighten-2">
+                                                <tr>
+                                                    <th class="w-25">Year</th>
+                                                    <th class="w-50">Number of Students Enrolled</th>
+                                                    <th class="w-25">Upload Supporting Documents</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <select class="selectpicker form-control" id="year21" name="year21">
+                                                            <option>Select</option>
+                                                            {% set ls=[]%}
+                                                            {% if data!='None'%}
+                                                                {% for data in data21 %}
+                                                                    {{ls.append(data['year']|int) }}
+                                                                {%endfor%}
+                                                            {%endif%}
+                                                            {%for i in range(2015,2030)%}
+                                                                {% if i not in ls %}
+                                                                    <option>{{i}}</option>
+                                                                {% endif %}
+                                                            {%endfor%}
+                                                        </select>
+                                                    </td>
+                                                    <td><input class="form-control" id="numberstudent" name="numberstudent" type="text"></td>
+                                                    <td><input type="file" class="form-control-file border" id="document21" name="document21"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="container-fluid pb-2">
+                                        <button class="login100-form-btn w-25">SUBMIT</button>
+                                    </div>
+                                </form>
+
+                                    <div class="table-responsive" >
+                                        <table class="table">
+                                            <thead class="grey lighten-2">
+                                                    <tr>
+                                                        <th class="w-25">Year</th>
+                                                        <th class="w-50">Number of Students Enrolled</th>
+                                                        <th class="w-25">Documents Uploaded</th>
+                                                        {%if seskey['type']=='admin'%}
+                                                        <th>Delete</th>{%endif%}
+                                                    </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% if dataset21.count()!=0 %}
+                                            {% for dataset in dataset21%}
+                                                <tr>
+                                                    <td>{{dataset['year']}}</td>
+                                                    <td>{{dataset['numberstudent']}}</td>
+                                                    <td><a href="static/files/ext21/{{dataset.file}}" ><i class="fa fa-file-pdf-o" style="color:red;font-size:24px;"></i></a></td>
+                                                    {%if seskey['type']=='admin'%}
+                                                    <td><a href="delext21/{{dataset['year']}}"><i class="material-icons" style="font-size:24px;color:red">delete</i></a></td>{%endif%}
+                                                </tr>
+                                            {% endfor %}
+                                            {%else%}
+                                            <tr>
+                                                <td colspan="3" style="color:red; text-align:center;">No data uploaded</td>
+                                            </tr>
+                                            {%endif%}
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+          </div>
+          <div class="accordion space-20 container-fluid my-2" id="parent22Accordion">
+                <button class="accordion-button" id="heading22" type="button" data-bs-toggle="collapse" data-bs-target="#collapse22" aria-expanded="false" aria-controls="collapse22">
+                    <strong>2.2</strong> Number of seats earmarked for reserved category as per GOI/ State Govt rule year wise during last five years
+                </button>
+                <div id="collapse22" class="accordion-collapse collapse container-fluid mt-2" aria-labelledby="heading22" data-bs-parent="#parent22Accordion">
+                    <div class="accordion-body">
+                        <div class="container-fluid border" >
+                            <form action="/ext2.2" method="POST" enctype = "multipart/form-data">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class="grey lighten-2">
+                                            <tr>
+                                                <th class="w-25">Year</th>
+                                                <th class="w-50">Number of seats earmarked for reserved category as per GOI/ State Govt rule</th>
+                                                <th class="w-25">Upload Supporting Documents</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <select class="selectpicker form-control" id="year" name="year">
+                                                        <option>Select</option>
+                                                        {% set ls=[]%}
+                                                        {% if data!='None'%}
+                                                            {% for data in data %}
+                                                                {{ls.append(data['year']|int) }}
+                                                            {%endfor%}
+                                                        {%endif%}
+                                                        {%for i in range(2015,2030)%}
+                                                            {% if i not in ls %}
+                                                                <option>{{i}}</option>
+                                                            {% endif %}
+                                                        {%endfor%}
+                                                    </select>
+                                                </td>
+                                                <td><input class="form-control" id="numberseat" name="numberseat" type="text"></td>
+                                                <td><input type="file" class="form-control-file border" id="document" name="document"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="container-fluid pb-2">
+                                    <button class="login100-form-btn w-25">SUBMIT</button>
+                                </div>
+                            </form>
+
+                                <div class="table-responsive" >
+                                    <table class="table">
+                                        <thead class="grey lighten-2">
+                                                <tr>
+                                                    <th class="w-25">Year</th>
+                                                    <th class="w-50">Number of seats earmarked for reserved category as per GOI/ State Govt rule</th>
+                                                    <th class="w-25">Documents Uploaded</th>
+                                                    {%if seskey['type']=='admin'%}
+                                                    <th>Delete</th>{%endif%}
+                                                </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% if dataset.count() != 0 %}
+                                        {% for dataset in dataset%}
+                                            <tr>
+                                                <td>{{dataset['year']}}</td>
+                                                <td>{{dataset['numberseat']}}</td>
+                                                <td><a href="static/files/ext22/{{dataset.file}}" ><i class="fa fa-file-pdf-o" style="color:red;font-size:24px;"></i></a></td>
+                                                {%if seskey['type']=='admin'%}
+                                                <td><a href="delext22/{{dataset['year']}}"><i class="material-icons" style="font-size:24px;color:red">delete</i></a></td>{%endif%}
+                                            </tr>
+                                        {% endfor %}
+                                        {%else%}
+                                            <tr>
+                                                <td colspan="3" style="color:red; text-align:center;">No Data Uploaded</td>
+                                            </tr>
+                                        {%endif%}
+                                        </tbody>
+                                    </table>
+                                </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+          <div class="accordion space-20 container-fluid my-2" id="parent23Accordion">
+                    <button class="accordion-button" id="heading23" type="button" data-bs-toggle="collapse" data-bs-target="#collapse23" aria-expanded="false" aria-controls="collapse23">
+                        <strong>2.3</strong> Number of outgoing/final year students year wise during the last five years
+                    </button>
+                    <div id="collapse23" class="accordion-collapse collapse container-fluid mt-2" aria-labelledby="heading23" data-bs-parent="#parent23Accordion">
+                        <div class="accordion-body">
+                            <div class="container-fluid border" >
+                                <form action="/ext2.3" method="POST" enctype = "multipart/form-data">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead class="grey lighten-2">
+                                                <tr>
+                                                    <th class="w-25">Year</th>
+                                                    <th class="w-50">Number of outgoing/final year students</th>
+                                                    <th class="w-25">Upload authenticated document showing the number of outgoing/final year students program-wise</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <select class="selectpicker form-control" id="year23" name="year23">
+                                                            <option>Select</option>
+                                                            {% set ls=[]%}
+                                                            {% if data23!='None'%}
+                                                                {% for data in data23 %}
+                                                                    {{ls.append(data['year']|int) }}
+                                                                {%endfor%}
+                                                            {%endif%}
+                                                            {%for i in range(2015,2030)%}
+                                                                {% if i not in ls %}
+                                                                    <option>{{i}}</option>
+                                                                {% endif %}
+                                                            {%endfor%}
+                                                        </select>
+                                                    </td>
+                                                    <td><input class="form-control" id="numberstudent23" name="numberstudent23" type="text"></td>
+                                                    <td><input type="file" class="form-control-file border" id="document23" name="document23"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="container-fluid pb-2">
+                                        <button class="login100-form-btn w-25">SUBMIT</button>
+                                    </div>
+                                </form>
+
+                                    <div class="table-responsive" >
+                                        <table class="table">
+                                            <thead class="grey lighten-2">
+                                                    <tr>
+                                                        <th class="w-25">Year</th>
+                                                        <th class="w-50">Number of outgoing/final year students</th>
+                                                        <th class="w-25">Documents Uploaded</th>
+                                                        {%if seskey['type']=='admin'%}
+                                                        <th>Delete</th>{%endif%}
+                                                    </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% if dataset23.count() != 0 %}
+                                            {% for dataset in dataset23%}
+                                                <tr>
+                                                    <td>{{dataset['year']}}</td>
+                                                    <td>{{dataset['numberseat']}}</td>
+                                                    <td><a href="static/files/ext23/{{dataset.file}}" ><i class="fa fa-file-pdf-o" style="color:red;font-size:24px;"></i></a></td>
+                                                    {%if seskey['type']=='admin'%}
+                                                    <td><a href="delext23/{{dataset['year']}}"><i class="material-icons" style="font-size:24px;color:red">delete</i></a></td>{%endif%}
+                                                </tr>
+                                            {% endfor %}
+                                            {%else%}
+                                            <tr>
+                                                <td colspan="3" style="color:red; text-align:center;">No data uploaded</td>
+                                            </tr>
+                                            {%endif%}
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+          </div>
+          <div class="accordion space-20 container-fluid my-2" id="parent31Accordion">
+              <button class="accordion-button" id="heading31" type="button" data-bs-toggle="collapse" data-bs-target="#collapse31" aria-expanded="false" aria-controls="collapse31">
+                        <strong>3.1</strong> Number of full time teachers year wise during the last five years
+                    </button>
+                    <div id="collapse31" class="accordion-collapse collapse container-fluid mt-2" aria-labelledby="heading31" data-bs-parent="#parent31Accordion">
+                        <div class="accordion-body">
+                            <div class="container-fluid border" >
+                                <form action="/ext3.1" method="POST" enctype = "multipart/form-data">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead class="grey lighten-2">
+                                                <tr>
+                                                    <th class="w-25">Year</th>
+                                                    <th class="w-50">Number of Full time teachers</th>
+                                                    <th class="w-25">Upload Supporting Documents</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <select class="selectpicker form-control" name="year">
+                                                            <option>Select</option>
+                                                            {% set ls=[]%}
+                                                            {% for data1 in data31 %}
+                                                            {{ls.append(data1['year']|int) }}
+                                                            {%endfor%}
+                                                            {%for i in range(2015,2030)%}
+                                                            {% if i not in ls %}
+                                                            <option>{{i}}</option>
+                                                            {% endif %}
+                                                            {%endfor%}
+                                                        </select>
+                                                    </td>
+                                                    <td><input class="form-control" name="numberpost" type="text"></td>
+                                                    <td><input type="file" class="form-control-file border" name="document"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="container-fluid pb-2">
+                                        <button class="login100-form-btn w-25">SUBMIT</button>
+                                    </div>
+                                </form>
+
+                                    <div class="table-responsive" >
+                                        <table class="table">
+                                            <thead class="grey lighten-2">
+                                                    <tr>
+                                                        <th class="w-25">Year</th>
+                                                        <th class="w-50">Number of Full time Teachers</th>
+                                                        <th class="w-25">Documents Uploaded</th>
+                                                        {%if seskey['type']=='admin'%}
+                                                        <th>Delete</th>
+                                                        {%endif%}
+                                                    </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% if dataset31.count()!=0 %}
+                                            {% for dataset in dataset31%}
+                                                <tr>
+                                                    <td>{{dataset['year']}}</td>
+                                                    <td>{{dataset['numberpost']}}</td>
+                                                    <td><a href="static/files/ext31/{{dataset.file}}" ><i class="fa fa-file-pdf-o" style="color:red;font-size:24px;"></i></a></td>
+                                                    {% if seskey['type']=='admin'%}
+                                                    <td><a href="delext31/{{dataset['year']}}"><i class="material-icons" style="font-size:24px;color:red">delete</i></a></td>{%endif%}
+                                                </tr>
+                                            {% endfor %}
+                                            {%else%}
+                                            <tr>
+                                                <td colspan="3" style="color:red; text-align:center;">No data uploaded</td>
+                                            </tr>
+                                            {%endif%}
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+          </div>
+          <div class="accordion space-20 container-fluid my-2" id="parent32Accordion">
+                    <button class="accordion-button" id="heading32" type="button" data-bs-toggle="collapse" data-bs-target="#collapse32" aria-expanded="false" aria-controls="collapse32">
+                        <strong>3.2</strong> Number of sanctioned posts year wise during the last five years
+                    </button>
+                    <div id="collapse32" class="accordion-collapse collapse container-fluid mt-2" aria-labelledby="heading32" data-bs-parent="#parent32Accordion">
+                        <div class="accordion-body">
+                            <div class="container-fluid border" >
+                                <form action="/ext3.2" method="POST" enctype = "multipart/form-data">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead class="grey lighten-2">
+                                                <tr>
+                                                    <th class="w-25">Year</th>
+                                                    <th class="w-50">Number of Sanctioned Posts</th>
+                                                    <th class="w-25">Upload Supporting Documents</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <select class="selectpicker form-control" name="year">
+                                                            <option>Select</option>
+                                                            {% set ls=[]%}
+                                                            {% for data1 in data1 %}
+                                                            {{ls.append(data1['year']|int) }}
+                                                            {%endfor%}
+                                                            {%for i in range(2015,2030)%}
+                                                            {% if i not in ls %}
+                                                            <option>{{i}}</option>
+                                                            {% endif %}
+                                                            {%endfor%}
+                                                        </select>
+                                                    </td>
+                                                    <td><input class="form-control" name="numberpost" type="text"></td>
+                                                    <td><input type="file" class="form-control-file border" name="document"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="container-fluid pb-2">
+                                        <button class="login100-form-btn w-25">SUBMIT</button>
+                                    </div>
+                                </form>
+
+                                    <div class="table-responsive" >
+                                        <table class="table">
+                                            <thead class="grey lighten-2">
+                                                    <tr>
+                                                        <th class="w-25">Year</th>
+                                                        <th class="w-50">Number of Sanctioned Posts</th>
+                                                        <th class="w-25">Documents Uploaded</th>
+                                                        {%if seskey['type']=='admin'%}
+                                                        <th>Delete</th>{%endif%}
+                                                    </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% if dataset1.count()!=0 %}
+                                            {% for dataset in dataset1%}
+                                                <tr>
+                                                    <td>{{dataset['year']}}</td>
+                                                    <td>{{dataset['numberpost']}}</td>
+                                                    <td><a href="static/files/ext32/{{dataset.file}}" ><i class="fa fa-file-pdf-o" style="color:red;font-size:24px;"></i></a></td>
+                                                    {%if seskey['type']=='admin'%}
+                                                    <td><a href="delext32/{{dataset['year']}}"><i class="material-icons" style="font-size:24px;color:red">delete</i></a></td>{%endif%}
+                                                </tr>
+                                            {% endfor %}
+                                            {%else%}
+                                            <tr>
+                                                <td colspan="3" style="color:red; text-align:center;">No data uploaded</td>
+                                            </tr>
+                                            {%endif%}
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+          </div>
+          <div class="accordion space-20 container-fluid my-2" id="parent41Accordion">
+                    <button class="accordion-button" id="heading41" type="button" data-bs-toggle="collapse" data-bs-target="#collapse41" aria-expanded="false" aria-controls="collapse41">
+                        <strong>4.1</strong> Total number of classrooms and seminar halls
+                    </button>
+                    <div id="collapse41" class="accordion-collapse collapse container-fluid mt-2" aria-labelledby="heading41" data-bs-parent="#parent41Accordion">
+                        <div class="accordion-body">
+                            <div class="container-fluid border" >
+
+                                <form action="/ext4.1" method="POST" enctype = "multipart/form-data">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead class="grey lighten-2">
+                                                <tr>
+                                                    <th class="w-20">No.of Classrooms</th>
+                                                    <th class="w-20">No.of Seminar Hall</th>
+                                                    <th class="w-20">Upload List of number of classrooms and seminar hall</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><input class="form-control" id="noclass" name="noclass" type="text"></td>
+                                                    <td><input class="form-control" id="noseminar" name="noseminar" type="text"></td>
+                                                    <td><input type="file" class="form-control-file border" id="doc41" name="doc41"></td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="container-fluid pb-2">
+                                        <button class="login100-form-btn w-25">SUBMIT</button>
+                                    </div>
+                                </form>
+
+                                <form action="/ext4.1p" method="POST" enctype = "multipart/form-data">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th>Classroom No./ Seminar Hall No.</th>
+                                                <th>Geo Tagged Photo</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="1"><input class="form-control" id="classno" name="classno" type="text"></td>
+                                                    <td colspan="2"><input type="file" class="form-control-file border" id="doc41p" name="doc41p"></td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="container-fluid">
+                                        <button class="login100-form-btn w-25">SUBMIT</button>
+                                    </div>
+                                </form>
+
+
+                                    <div class="table-responsive" >
+                                        <table class="table">
+                                            <thead class="grey lighten-2">
+                                                    <tr>
+                                                        <th class="w-20">No.of Classrooms</th>
+                                                        <th class="w-20">No.of Seminar Hall</th>
+                                                        <th class="w-20">Upload List of number of classrooms and seminar hall</th>
+                                                        {%if seskey['type']=='admin'%}
+                                                        <th>Delete</th>{%endif%}
+                                                    </tr>
+                                            </thead>
+                                            <tbody>
+                                            {%if dataset41.count()!=0%}
+                                            {% for dataset in dataset41%}
+
+                                                <tr>
+                                                    <td>{{dataset['noclass']}}</td>
+                                                    <td>{{dataset['noseminar']}}</td>
+                                                    <td colspan="0"><a href="static/files/ext41/{{dataset.file}}" ><i class="fa fa-file-pdf-o" style="color:red;font-size:24px;"></i></a></td>
+                                                    {%if seskey['type']=='admin'%}
+                                                    <td><a href="delext41/{{dataset['id']}}"><i class="material-icons" style="font-size:24px;color:red">delete</i></a></td>{%endif%}
+                                                </tr>
+                                                
+
+                                            {% endfor %}
+                                            {%else%}
+                                            <tr>
+                                                <td colspan="3" style="color:red; text-align:center;">No data uploaded</td>
+                                            </tr>
+                                            {%endif%}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th>Classroom No./ Seminar Hall No.</th>
+                                                <th>Geo Tagged Photo</th>
+                                                {%if seskey['type']=='admin'%}
+                                                <th>Delete</th>
+                                                {%endif%}
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+
+                                            <tr>
+                                                {%if dataset41p.count()!=0%}
+                                                    {%for dataset in dataset41p%}
+                                                    <td>{{dataset['classno']}}</td>
+                                                    <td><a href="static/files/ext41/{{dataset.pic}}" ><i class="fa fa-file-pdf-o" style="color:red;font-size:24px;"></i></a></td>
+                                                    {%if seskey['type']=='admin'%}
+                                                        <td><a href="delext41p/{{dataset['classno']}}"><i class="material-icons" style="font-size:24px;color:red">delete</i></a></td>{%endif%}
+                                                    {%endfor%}
+                                                {%else%}
+                                                    <td colspan="2" style="color:red; text-align:center;">No File Uploaded</td>
+                                                {%endif%}
+
+                                            </tr>
+
+                                            </tbody>
+                                        </table>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+          </div>
+          <div class="accordion space-20 container-fluid my-2" id="parent42Accordion">
+                    <button class="accordion-button" id="heading42" type="button" data-bs-toggle="collapse" data-bs-target="#collapse42" aria-expanded="false" aria-controls="collapse42">
+                        <strong>4.2</strong> Total Expenditure excluding salary year wise during the last five years (INR in Lakhs)
+                    </button>
+                    <div id="collapse42" class="accordion-collapse collapse container-fluid mt-2" aria-labelledby="heading42" data-bs-parent="#parent42Accordion">
+                        <div class="accordion-body">
+                            <div class="container-fluid border" >
+                                <form action="/ext4.2" method="POST" enctype = "multipart/form-data">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead class="grey lighten-2">
+                                                <tr>
+                                                    <th class="w-25">Year</th>
+                                                    <th class="w-25">Total expenditure excluding Salary(in Lakhs)</th>
+                                                    <th class="w-50">Upload Audited Statement of income and expenditure duly certified by the Principal and Charted Accountant </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <select class="selectpicker form-control" id="year42" name="year42">
+                                                            <option>Select</option>
+                                                            {% set ls=[]%}
+                                                            {% if data42!='None'%}
+                                                                {% for data in data42 %}
+                                                                    {{ls.append(data['year']|int) }}
+                                                                {%endfor%}
+                                                            {%endif%}
+                                                            {%for i in range(2015,2030)%}
+                                                                {% if i not in ls %}
+                                                                    <option>{{i}}</option>
+                                                                {% endif %}
+                                                            {%endfor%}
+                                                        </select>
+                                                    </td>
+                                                    <td><input class="form-control" id="expenditure" name="expenditure" type="text"></td>
+                                                    <td><input type="file" class="form-control-file border" id="document42" name="document42"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="container-fluid pb-2">
+                                        <button class="login100-form-btn w-25">SUBMIT</button>
+                                    </div>
+                                </form>
+
+                                    <div class="table-responsive" >
+                                        <table class="table">
+                                            <thead class="grey lighten-2">
+                                                    <tr>
+                                                        <th class="w-25">Year</th>
+                                                        <th class="w-25">Total expenditure excluding Salary(in Lakhs)</th>
+                                                        <th class="w-25">Documents Uploaded</th>
+                                                        {%if seskey['type']=='admin'%}
+                                                        <th>Delete</th>{%endif%}
+                                                    </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% if dataset42.count()!=0 %}
+                                            {% for dataset in dataset42%}
+                                                <tr>
+                                                    <td>{{dataset['year']}}</td>
+                                                    <td>{{dataset['expenditure']}}</td>
+                                                    <td><a href="static/files/ext42/{{dataset.file}}" ><i class="fa fa-file-pdf-o" style="color:red;font-size:24px;"></i></a></td>
+                                                    {%if seskey['type']=='admin'%}
+                                                    <td><a href="delext42/{{dataset['year']}}"><i class="material-icons" style="font-size:24px;color:red">delete</i></a></td>{%endif%}
+                                                </tr>
+                                            {% endfor %}
+                                            {%else%}
+                                            <tr>
+                                                <td colspan="3" style="color:red; text-align:center">No data uploaded</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    {%endif%}
+
+                            </div>
+                        </div>
+                    </div>
+          </div>
+          <div class="accordion space-20 container-fluid my-2" id="parent43Accordion">
+                    <button class="accordion-button" id="heading43" type="button" data-bs-toggle="collapse" data-bs-target="#collapse43" aria-expanded="false" aria-controls="collapse43">
+                        <strong>4.3</strong> Total number of computers in the campus for academic purpose
+                    </button>
+                    <div id="collapse43" class="accordion-collapse collapse container-fluid mt-2" aria-labelledby="heading43" data-bs-parent="#parent43Accordion">
+                        <div class="accordion-body">
+                            <div class="container-fluid border" >
+                                <form action="/ext4.3" method="POST" enctype = "multipart/form-data">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead class="grey lighten-2">
+                                                <tr>
+                                                    <th class="w-50">Total No. of Computers</th>
+                                                    <th class="w-50">Upload Stock register extracts/invoice copy duly certified</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><input class="form-control" id="nocomputer" name="nocomputer" type="text"></td>
+                                                    <td><input type="file" class="form-control-file border" id="document43" name="document43"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="container-fluid pb-2">
+                                        <button class="login100-form-btn w-25">SUBMIT</button>
+                                    </div>
+                                </form>
+
+                                    <div class="table-responsive" >
+                                        <table class="table">
+                                            <thead class="grey lighten-2">
+                                                    <tr>
+                                                        <th class="w-50">Total No. of Computers in the campus for academic purpose</th>
+                                                        <th class="w-50">Upload Stock register extracts/invoice copy duly certified</th>
+                                                        {%if seskey['type']=='admin'%}
+                                                        <th>Delete</th>{%endif%}
+                                                    </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% if dataset43.count()!=0 %}
+                                            {% for dataset in dataset43%}
+                                                <tr>
+                                                    <td>{{dataset['nocomputer']}}</td>
+                                                    <td><a href="static/files/ext43/{{dataset.file}}" ><i class="fa fa-file-pdf-o" style="color:red;font-size:24px;"></i></a></td>
+                                                    {%if seskey['type']=='admin'%}
+                                                    <td><a href="delext43/{{dataset['id']}}"><i class="material-icons" style="font-size:24px;color:red">delete</i></a></td>{%endif%}
+                                                </tr>
+                                            {% endfor %}
+                                            {%else%}
+                                            <tr>
+                                                <td colspan="3" style="color:red; text-align:center">No data uploaded</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    {%endif%}
+
+                            </div>
+                        </div>
+                    </div>
+          </div>
+
+      </div>
+
+    </div>
+    <script src="{{ url_for('static',filename='vendor/jquery/jquery-3.2.1.min.js')}}"></script>
+
+	<script src="{{ url_for('static',filename='vendor/bootstrap/js/popper.js') }}"></script>
+	<script src="{{ url_for('static',filename='vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+
+	<script src="{{ url_for('static',filename='vendor/select2/select2.min.js') }}"></script>
+
+	<script src="{{ url_for('static',filename='vendor/tilt/tilt.jquery.min.js') }}"></script>
+
+
+	<script src="{{ url_for('static',filename='js/main.js') }}"></script>
+{% endblock%}
