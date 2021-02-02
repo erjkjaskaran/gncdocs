@@ -10,7 +10,7 @@ from src.models.useradmin import UserAdmin
 
 app = Flask(__name__)
 app.secret_key = "gnc1966"
-app.config['UPLOAD_FOLDER'] = "C:\\Users\\gursharanpal\\PycharmProjects\\gncdocs\\src\\static\\files"
+app.config['UPLOAD_FOLDER'] = "C:\\Users\\erjk\\PycharmProjects\\gncdocs\\src\\static\\files"
 
 
 @app.route('/login')
