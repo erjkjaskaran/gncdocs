@@ -10,18 +10,18 @@ from src.models.useradmin import UserAdmin
 
 app = Flask(__name__)
 app.secret_key = "gnc1966"
-app.config['UPLOAD_FOLDER'] = "C:\\Users\\erjk\\PycharmProjects\\gncdocs\\src\\static\\files"
+app.config['UPLOAD_FOLDER'] = "C:\\Users\\erjkj\\PycharmProjects\\gncdocs\\src\\static\\files"
 
 
 @app.route('/login')
 def login():
     try:
-        if session['name'] is None:
-            return render_template('login.html')
-        else:
+        if session.get('name') is not None:
             return render_template("dashboard.html", seskey=session)
+        else:
+            return render_template('login.html')
     except Exception as e:
-        return render_template('exception.html',e)
+        return render_template('exception.html', e)
 
 
 @app.route('/')
@@ -145,11 +145,13 @@ def adminpage():
 
 @app.route('/criteria1')
 def criteria1():
-    if session['name'] is None:
-        return redirect(url_for('login'))
-    else:
+    if session.get('name') is not None:
         dataset113 = Database.find("cri113", {})
-        return render_template("criteria1.html", seskey=session, dataset113=dataset113)
+        dataset132 = Database.find("cri132", {})
+        dataset133 = Database.find("cri133", {})
+        return render_template("criteria1.html", seskey=session, dataset113=dataset113, dataset132=dataset132, dataset133=dataset133)
+    else:
+        return redirect(url_for('login'))
 
 
 @app.route('/cri1.1.3', methods=['POST', 'GET'])
@@ -166,6 +168,43 @@ def cri113():
         return redirect(url_for('criteria1'))
     except Exception as e:
         return render_template("exception.html", e=e)
+
+
+@app.route('/cri1.3.2', methods=['POST', 'GET'])
+def cri132():
+    try:
+        y = request.form.get('year132')
+        pc = request.form.get('programcode')
+        nc = request.form.get('namecourse')
+        cc = request.form.get('coursecode')
+        ns = request.form.get('namestudent')
+        f = request.files["document"]
+        f.filename = y+"_" + cc + "_" + ns + ".pdf"
+        f.save(os.path.join(app.config["UPLOAD_FOLDER"], 'cri132', f.filename))
+        Database.insert("cri132",
+                        {"id": session['name'], "year": y, "programcode": pc, "nameofcourse": nc, "coursecode": cc, "nameofstudent": ns, "file": f.filename})
+        return redirect(url_for('criteria1'))
+    except Exception as e:
+        return render_template("exception.html", e=e)
+
+
+@app.route('/cri1.3.3', methods=['POST', 'GET'])
+def cri133():
+    try:
+        pn = request.form.get('programname133')
+        pc = request.form.get('programcode133')
+        f = request.files["liststudent"]
+        f.filename = pn+"_" + "_" + pc + "_studentlist.pdf"
+        f.save(os.path.join(app.config["UPLOAD_FOLDER"], 'cri133', f.filename))
+        f1 = request.files["document133"]
+        f1.filename = pn + "_" + "_" + pc + "_doc.pdf"
+        f1.save(os.path.join(app.config["UPLOAD_FOLDER"], 'cri133', f1.filename))
+        Database.insert("cri133",
+                        {"id": session['name'], "nameofprogram": pn,"programcode": pc, "liststudent": f.filename, "file":f1.filename})
+        return redirect(url_for('criteria1'))
+    except Exception as e:
+        return render_template("exception.html", e=e)
+
 
 
 @app.route('/criteria2')
@@ -219,7 +258,7 @@ def criteria7():
 @app.route('/extendedprofile')
 def extprof():
     try:
-        if session['name'] is not None:
+        if session.get('name') is not None:
             data11 = Database.find("ext11f", {})
             data12 = Database.find("ext12f", {})
             data = Database.find("ext22", {})
@@ -487,6 +526,24 @@ def deleteext43(id=None):
 def deleteext32(id=None):
     Database.delete_one("ext32", {'year': id})
     return redirect(url_for('extprof'))
+
+
+@app.route('/delcri113/<string:yy>,<string:nt>', methods=['POST', 'GET'])
+def deletecri113(yy=None, nt=None):
+    Database.delete_one("cri113", {'year': yy, 'nameofteacher': nt})
+    return redirect(url_for('criteria1'))
+
+
+@app.route('/delcri132/<string:cc>,<string:ns>', methods=['POST', 'GET'])
+def deletecri132(cc=None, ns=None):
+    Database.delete_one("cri132", {'coursecode': cc, 'nameofstudent': ns})
+    return redirect(url_for('criteria1'))
+
+
+@app.route('/delcri133/<string:pc>', methods=['POST', 'GET'])
+def deletecri133(pc=None):
+    Database.delete_one("cri133", {'programcode': pc})
+    return redirect(url_for('criteria1'))
 
 
 @app.route('/criterion1')
