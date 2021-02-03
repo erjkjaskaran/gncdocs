@@ -548,7 +548,11 @@ def deletecri133(pc=None):
 
 @app.route('/criterion1')
 def criterion1():
-    return render_template("criterion1.html", seskey=session)
+    dataset113 = Database.find("cri113", {})
+    dataset132 = Database.find("cri132", {})
+    dataset133 = Database.find("cri133", {})
+    return render_template("criterion1.html", seskey=session, dataset113=dataset113, dataset132=dataset132,
+                           dataset133=dataset133)
 
 
 @app.route('/criterion2')
