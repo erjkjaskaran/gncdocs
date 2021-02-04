@@ -1,4 +1,5 @@
 from datetime import timedelta
+import uuid
 import os
 import flask_login
 from flask import Flask, render_template, request, session, url_for, g
@@ -206,13 +207,40 @@ def cri133():
         return render_template("exception.html", e=e)
 
 
-
 @app.route('/criteria2')
 def criteria2():
     if session['name'] is None:
         return redirect(url_for('login'))
     else:
-        return render_template("criteria2.html", seskey=session)
+        dataset211 = Database.find('cri221', {})
+        return render_template("criteria2.html", seskey=session, dataset211=dataset211)
+
+
+@app.route('/cri2.1.1', methods=['POST', 'GET'])
+def cri211():
+    try:
+        y = request.form.get('year211')
+        pn = request.form.get('programname')
+        pc = request.form.get('programcode')
+        ss = request.form.get('nosanctionedseat')
+        sa = request.form.get('noadmittedstudent')
+        f = request.files["documentsanction"]
+        f.filename = pn + "_sanctionedseat.pdf"
+        f.save(os.path.join(app.config["UPLOAD_FOLDER"], 'cri211', f.filename))
+        f1 = request.files["documentadmitted"]
+        f1.filename = pn + "_" + y + "_studentadmitted.pdf"
+        f1.save(os.path.join(app.config["UPLOAD_FOLDER"], 'cri211', f1.filename))
+        Database.insert("cri211",
+                        {"_id": ""+ uuid.uuid4().hex, "id": session['name'], "year": y, "programname": pn, "programcode": pc, "seatsanctioned": ss, "studentadmitted": sa, "sanction": f.filename, "admitted": f1.filename})
+        return redirect(url_for('criteria2'))
+    except Exception as e:
+        return render_template("exception.html", e=e)
+
+
+@app.route('/delcri211/<string:id>', methods=['POST', 'GET'])
+def deletecri221(id=None):
+    Database.delete_one("cri211", {'_id': id})
+    return redirect(url_for('criteria2'))
 
 
 @app.route('/criteria3')

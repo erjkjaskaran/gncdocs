@@ -4,7 +4,97 @@
     <div class="limiter">
       <div class="container-login100">
 
-        <div class="space-20"> This is Criterion 2: Teaching- Learning and Evaluation </div>
+        <div class="accordion space-20 container-fluid my-2" id="parent211Accordion">
+                    <button class="accordion-button text-justify" id="heading211" type="button" data-bs-toggle="collapse" data-bs-target="#collapse211" aria-expanded="false" aria-controls="collapse211">
+                        <strong>2.1.1</strong> Enrolment of students in last five years.
+                    </button>
+                    <div id="collapse211" class="accordion-collapse collapse container-fluid mt-2" aria-labelledby="heading211" data-bs-parent="#parent211Accordion">
+                        <div class="accordion-body">
+                            <div class="container-fluid border" >
+                                <form action="/cri2.1.1" method="POST" enctype = "multipart/form-data">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead class="grey lighten-2">
+                                                <tr>
+                                                    <th class="w-25">Year</th>
+                                                    <th class="w-25">Program Name</th>
+                                                    <th class="w-25">Program Code</th>
+													<th class="w-25">Number of seats Sanctioned</th>
+                                                    <th class="w-25">Number of students admitted</th>
+                                                    <th class="w-25">Upload Document related to Sanction of intake from affiliating University</th>
+                                                    <th class="w-25">Upload Approved admission list year-wise/ program-wise from the affiliating university.</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <select class="selectpicker form-control" id="year211" name="year211">
+                                                            <option>Select</option>
+                                                            {%for i in range(2015,2030)%}
+                                                               <option>{{i}}</option>
+															{%endfor%}
+                                                        </select>
+                                                    </td>
+                                                    <td><input class="form-control" id="programname" name="programname" type="text"></td>
+													<td><input class="form-control" id="programcode" name="programcode" type="text"></td>
+                                                    <td><input class="form-control" id="nosanctionedseat" name="nosanctionedseat" type="text"></td>
+                                                    <td><input class="form-control" id="noadmittedstudent" name="noadmittedstudent" type="text"></td>
+                                                    <td><input type="file" class="form-control-file border" id="documentsanction" name="documentsanction"></td>
+                                                    <td><input type="file" class="form-control-file border" id="documentadmitted" name="documentadmitted"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="container-fluid pb-2">
+                                        <button class="login100-form-btn w-25">SUBMIT</button>
+                                    </div>
+                                </form>
+
+                                    <div class="table-responsive" >
+                                        <table class="table">
+                                            <thead class="grey lighten-2">
+                                                <tr>
+                                                    <th class="w-25">Year</th>
+                                                    <th class="w-25">Program Name</th>
+                                                    <th class="w-25">Program Code</th>
+													<th class="w-25">Number of seats Sanctioned</th>
+                                                    <th class="w-25">Number of students admitted</th>
+                                                    <th class="w-25">Upload Document related to Sanction of intake from affiliating University</th>
+                                                    <th class="w-25">Upload Approved admission list year-wise/ program-wise from the affiliating university.</th>
+                                                    {%if seskey['type']=='admin'%}
+                                                    <th>Delete</th>{%endif%}
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% if dataset211.count() != 0 %}
+                                            {% for dataset in dataset211%}
+                                                <tr>
+                                                    <td>{{dataset['year']}}</td>
+                                                    <td>{{dataset['programname']}}</td>
+                                                    <td>{{dataset['programcode']}}</td>
+                                                    <td>{{dataset['seatsanctioned']}}</td>
+                                                    <td>{{dataset['studentadmitted']}}</td>
+                                                    <td><a href="static/files/cri211/{{dataset.sanction}}" ><i class="fa fa-file-pdf-o" style="color:red;font-size:24px;"></i></a></td>
+                                                    <td><a href="static/files/cri211/{{dataset.admitted}}" ><i class="fa fa-file-pdf-o" style="color:red;font-size:24px;"></i></a></td>
+                                                    {%if seskey['type']=='admin'%}
+                                                    <td><a href="delcri211/{{dataset['_id']}}"><i class="material-icons" style="font-size:24px;color:red">delete</i></a></td>{%endif%}
+                                                </tr>
+                                            {% endfor %}
+                                            {%else%}
+                                                <tr>
+                                                    <td colspan="7" style="color:red; text-align:center">No data uploaded</td>
+                                                </tr>
+                                            {%endif%}
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+          </div>
 
       </div>
 
