@@ -5,13 +5,13 @@ import flask_login
 from flask import Flask, render_template, request, session, url_for, g
 from werkzeug.utils import redirect
 
-from src.common.database import Database
-from src.models.User import User
-from src.models.useradmin import UserAdmin
+from gnc.common.database import Database
+from gnc.models.User import User
+from gnc.models.useradmin import UserAdmin
 
 app = Flask(__name__)
 app.secret_key = "gnc1966"
-app.config['UPLOAD_FOLDER'] = "C:\\Users\\erjkj\\PycharmProjects\\gncdocs\\src\\static\\files"
+app.config['UPLOAD_FOLDER'] = "C:\\Users\\erjkj\\PycharmProjects\\gncdocs\\gnc\\static\\files"
 
 
 @app.route('/login')

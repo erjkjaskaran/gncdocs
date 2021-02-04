@@ -1,6 +1,6 @@
 from flask import session
 
-from src.common.database import Database
+from gnc.common.database import Database
 
 
 class UserAdmin(object):
