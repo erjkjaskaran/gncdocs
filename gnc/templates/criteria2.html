@@ -4,6 +4,7 @@
     <div class="limiter">
       <div class="container-login100">
 
+
           <div class="accordion space-20 container-fluid my-2" id="parent211Accordion">
                     <button class="accordion-button text-justify" id="heading211" type="button" data-bs-toggle="collapse" data-bs-target="#collapse211" aria-expanded="false" aria-controls="collapse211">
                         <strong>2.1.1</strong> Enrolment of students in last five years.
@@ -16,20 +17,18 @@
                                         <table class="table">
                                             <thead class="grey lighten-2">
                                                 <tr>
-                                                    <th class="w-25">Year</th>
+                                                    <th >Year</th>
                                                     <th class="w-25">Program Name</th>
                                                     <th class="w-25">Program Code</th>
 													<th class="w-25">Number of seats Sanctioned</th>
                                                     <th class="w-25">Number of students admitted</th>
-                                                    <th class="w-25">Upload Document related to Sanction of intake from affiliating University</th>
-                                                    <th class="w-25">Upload Approved admission list year-wise/ program-wise from the affiliating university.</th>
 
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
                                                     <td>
-                                                        <select class="selectpicker form-control" id="year211" name="year211">
+                                                        <select class="selectpicker form-control" id="year211" name="year211" style="width:94px;">
                                                             <option>Select</option>
                                                             {%for i in range(2015,2030)%}
                                                                <option>{{i}}</option>
@@ -40,9 +39,21 @@
 													<td><input class="form-control" id="programcode" name="programcode" type="text"></td>
                                                     <td><input class="form-control" id="nosanctionedseat" name="nosanctionedseat" type="text"></td>
                                                     <td><input class="form-control" id="noadmittedstudent" name="noadmittedstudent" type="text"></td>
-                                                    <td><input type="file" class="form-control-file border" id="documentsanction" name="documentsanction"></td>
-                                                    <td><input type="file" class="form-control-file border" id="documentadmitted" name="documentadmitted"></td>
+                                                    </tr>
+                                            </tbody>
+                                            <thead class="grey lighten-2">
+                                                <tr>
+                                                    <th class="w-25" colspan="2">Upload Document related to Sanction of intake from affiliating University</th>
+                                                    <th class="w-25" colspan="2">Upload Approved admission list year-wise/ program-wise from the affiliating university.</th>
+
                                                 </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td colspan="2"><input type="file" class="form-control-file border" id="documentsanction1" name="documentsanction"></td>
+                                                <td colspan="2"><input type="file" class="form-control-file border" id="documentadmitted1" name="documentadmitted"></td>
+
+                                            </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -55,13 +66,13 @@
                                         <table class="table">
                                             <thead class="grey lighten-2">
                                                 <tr>
-                                                    <th class="w-25">Year</th>
-                                                    <th class="w-25">Program Name</th>
-                                                    <th class="w-25">Program Code</th>
-													<th class="w-25">Number of seats Sanctioned</th>
-                                                    <th class="w-25">Number of students admitted</th>
-                                                    <th class="w-25">Upload Document related to Sanction of intake from affiliating University</th>
-                                                    <th class="w-25">Upload Approved admission list year-wise/ program-wise from the affiliating university.</th>
+                                                    <th>Year</th>
+                                                    <th>Program Name</th>
+                                                    <th>Program Code</th>
+													<th>Number of seats Sanctioned</th>
+                                                    <th>Number of students admitted</th>
+                                                    <th>Upload Document related to Sanction of intake from affiliating University</th>
+                                                    <th>Upload Approved admission list year-wise/ program-wise from the affiliating university.</th>
                                                     {%if seskey['type']=='admin'%}
                                                     <th>Delete</th>{%endif%}
                                                 </tr>
@@ -95,45 +106,25 @@
                         </div>
                     </div>
           </div>
-          <div class="accordion space-20 container-fluid my-2" id="parent212Accordion">
-                    <button class="accordion-button text-justify" id="heading212" type="button" data-bs-toggle="collapse" data-bs-target="#collapse212" aria-expanded="false" aria-controls="collapse212">
-                        <strong>2.1.2</strong>  Seats filled against seats reserved for various categories (SC, ST, OBC, Divyangjan, etc. as per applicable reservation policy uring the last five years                    </button>
-                    <div id="collapse212" class="accordion-collapse collapse container-fluid mt-2" aria-labelledby="heading212" data-bs-parent="#parent212Accordion">
+          <div class="accordion space-20 container-fluid my-2" id="parent212aAccordion">
+                    <button class="accordion-button text-justify" id="heading212a" type="button" data-bs-toggle="collapse" data-bs-target="#collapse212a" aria-expanded="false" aria-controls="collapse212a">
+                        <strong>2.1.2 (a)</strong> Seats filled against seats reserved for various categories (SC, ST, OBC, Divyangjan, etc. as per applicable reservation policy during the last five years
+                    </button>
+                    <div id="collapse212a" class="accordion-collapse collapse container-fluid mt-2" aria-labelledby="heading212a" data-bs-parent="#parent212aAccordion">
                         <div class="accordion-body">
                             <div class="container-fluid border" >
-                                <form action="/cri2.1.1" method="POST" enctype = "multipart/form-data">
+                                <form action="/cri2.1.2a" method="POST" enctype = "multipart/form-data">
                                     <div class="table-responsive">
                                         <table class="table">
                                             <thead class="grey lighten-2">
                                                 <tr>
-                                                    <th class="w-25">Year</th>
-                                                    <th class="w-25">Program Name</th>
-                                                    <th class="w-25">Program Code</th>
-													<th class="w-25">Number of seats Sanctioned</th>
-                                                    <th class="w-25">Number of students admitted</th>
-                                                    <th class="w-25">Upload Document related to Sanction of intake from affiliating University</th>
-                                                    <th class="w-25">Upload Approved admission list year-wise/ program-wise from the affiliating university.</th>
+                                                    <th>Copy of letter issued by state govt. or Central Government indicating the reserved categories to be considered as per the state rule</th>
+                                                    <td><input class="form-control" id="stategovt" name="stategovt" type="file"></td>
 
                                                 </tr>
+
                                             </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <select class="selectpicker form-control" id="year212" name="year212">
-                                                            <option>Select</option>
-                                                            {%for i in range(2015,2030)%}
-                                                               <option>{{i}}</option>
-															{%endfor%}
-                                                        </select>
-                                                    </td>
-                                                    <td><input class="form-control" id="programname" name="programname" type="text"></td>
-													<td><input class="form-control" id="programcode" name="programcode" type="text"></td>
-                                                    <td><input class="form-control" id="nosanctionedseat" name="nosanctionedseat" type="text"></td>
-                                                    <td><input class="form-control" id="noadmittedstudent" name="noadmittedstudent" type="text"></td>
-                                                    <td><input type="file" class="form-control-file border" id="documentsanction" name="documentsanction"></td>
-                                                    <td><input type="file" class="form-control-file border" id="documentadmitted" name="documentadmitted"></td>
-                                                </tr>
-                                            </tbody>
+
                                         </table>
                                     </div>
                                     <div class="container-fluid pb-2">
@@ -145,36 +136,205 @@
                                         <table class="table">
                                             <thead class="grey lighten-2">
                                                 <tr>
-                                                    <th class="w-25">Year</th>
-                                                    <th class="w-25">Program Name</th>
-                                                    <th class="w-25">Program Code</th>
-													<th class="w-25">Number of seats Sanctioned</th>
-                                                    <th class="w-25">Number of students admitted</th>
-                                                    <th class="w-25">Upload Document related to Sanction of intake from affiliating University</th>
-                                                    <th class="w-25">Upload Approved admission list year-wise/ program-wise from the affiliating university.</th>
-                                                    {%if seskey['type']=='admin'%}
+                                                    <th></th>
+                                                    <th></th>
+                                                    {%if seskey['type']=='admin' and dataset212a.count()!=0%}
                                                     <th>Delete</th>{%endif%}
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            {% if dataset212.count() != 0 %}
-                                            {% for dataset in dataset212%}
+
+                                                <tr>
+                                                    <th>Copy of letter issued by state govt. or Central Government indicating the reserved categories to be considered as per the state rule</th>
+                                                    {% if dataset212a.count() != 0 %}
+                                                    {% for dataset in dataset212a%}
+                                                    <td><a href="static/files/cri212a/{{dataset.stategovt}}" ><i class="fa fa-file-pdf-o" style="color:red;font-size:24px;"></i></a></td>
+                                                    {%if seskey['type']=='admin'%}
+                                                    <td><a href="delcri212a/{{dataset['_id']}}"><i class="material-icons" style="font-size:24px;color:red">delete</i></a></td>{%endif%}
+                                                    {% endfor %}
+                                                    {%else%}
+                                                    <td style="color:red; text-align:center">No data uploaded</td>
+                                                    {%endif%}
+
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+          </div>
+          <div class="accordion space-20 container-fluid my-2" id="parent212bAccordion">
+                    <button class="accordion-button text-justify" id="heading212b" type="button" data-bs-toggle="collapse" data-bs-target="#collapse212b" aria-expanded="false" aria-controls="collapse212b">
+                        <strong>2.1.2 (b)</strong> Seats filled against seats reserved for various categories (SC, ST, OBC, Divyangjan, etc. as per applicable reservation policy during the last five years
+                    </button>
+                    <div id="collapse212b" class="accordion-collapse collapse container-fluid mt-2" aria-labelledby="heading212b" data-bs-parent="#parent212bAccordion">
+                        <div class="accordion-body">
+                            <div class="container-fluid border" >
+                                <form action="/cri2.1.2b" method="POST" enctype = "multipart/form-data">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead class="grey lighten-2">
+                                                <tr>
+                                                    <th>Year</th>
+                                                    <th>
+                                                        <select class="selectpicker form-control" id="year212b" name="year212b">
+                                                            <option>Select</option>
+                                                            {% set ls=[]%}
+                                                            {% if data212b!='None'%}
+                                                                {% for data in data212b %}
+                                                                    {{ls.append(data['year']|int) }}
+                                                                {%endfor%}
+                                                            {%endif%}
+                                                            {%for i in range(2015,2030)%}
+                                                                {% if i not in ls %}
+                                                                    <option>{{i}}</option>
+                                                                {% endif %}
+                                                            {%endfor%}
+                                                        </select>
+                                                    </th>
+
+                                                </tr>
+
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <th>Number of seats earmarked for the reserved categories</th>
+                                                <td><input class="form-control" id="noseats" name="noseats" type="text"></td>
+                                            </tr>
+                                                <tr>
+
+                                                    <th>Final admission list indicating the category as published by the HEI and signed by the principal</th>
+                                                    <td><input class="form-control" id="admissionlist" name="admissionlist" type="file"></td>
+
+                                                </tr>
+                                                <tr>
+                                                    <th>Admission extract submitted to the state OBC, SC and ST cell every year.</th>
+                                                    <td><input class="form-control" id="admissionextract" name="admissionextract" type="file"></td>
+
+                                                </tr>
+
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+                                    <div class="container-fluid pb-2">
+                                        <button class="login100-form-btn w-25">SUBMIT</button>
+                                    </div>
+                                </form>
+
+                                    <div class="table-responsive" >
+                                        <table class="table">
+                                            <thead class="grey lighten-2">
+                                                <tr>
+                                                    <th>Year</th>
+                                                    <th>Number of seats earmarked for the reserved categories</th>
+                                                    <th>Final admission list indicating the category as published by the HEI and signed by the principal</th>
+                                                    <th>Admission extract submitted to the state OBC, SC and ST cell every year.</th>
+													{%if seskey['type']=='admin'%}
+                                                    <th>Delete</th>{%endif%}
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% if dataset212b.count() != 0 %}
+                                            {% for dataset in dataset212b%}
                                                 <tr>
                                                     <td>{{dataset['year']}}</td>
-                                                    <td>{{dataset['programname']}}</td>
-                                                    <td>{{dataset['programcode']}}</td>
-                                                    <td>{{dataset['seatsanctioned']}}</td>
-                                                    <td>{{dataset['studentadmitted']}}</td>
-                                                    <td><a href="static/files/cri212/{{dataset.sanction}}" ><i class="fa fa-file-pdf-o" style="color:red;font-size:24px;"></i></a></td>
-                                                    <td><a href="static/files/cri212/{{dataset.admitted}}" ><i class="fa fa-file-pdf-o" style="color:red;font-size:24px;"></i></a></td>
+                                                    <td>{{dataset['noseat']}}</td>
+                                                    <td><a href="static/files/cri212b/{{dataset.admissionlist}}" ><i class="fa fa-file-pdf-o" style="color:red;font-size:24px;"></i></a></td>
+                                                    <td><a href="static/files/cri212b/{{dataset.admissionextract}}" ><i class="fa fa-file-pdf-o" style="color:red;font-size:24px;"></i></a></td>
                                                     {%if seskey['type']=='admin'%}
-                                                    <td><a href="delcri212/{{dataset['_id']}}"><i class="material-icons" style="font-size:24px;color:red">delete</i></a></td>{%endif%}
+                                                    <td><a href="delcri212b/{{dataset['_id']}}"><i class="material-icons" style="font-size:24px;color:red">delete</i></a></td>{%endif%}
                                                 </tr>
                                             {% endfor %}
                                             {%else%}
                                                 <tr>
                                                     <td colspan="7" style="color:red; text-align:center">No data uploaded</td>
                                                 </tr>
+                                            {%endif%}
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+          </div>
+          <div class="accordion space-20 container-fluid my-2" id="parent222Accordion">
+                    <button class="accordion-button text-justify" id="heading222" type="button" data-bs-toggle="collapse" data-bs-target="#collapse222" aria-expanded="false" aria-controls="collapse222">
+                        <strong>2.2.2</strong> Student- Full time teacher ratio (Data for the latest completed academic year)
+                    </button>
+                    <div id="collapse222" class="accordion-collapse collapse container-fluid mt-2" aria-labelledby="heading222" data-bs-parent="#parent222Accordion">
+                        <div class="accordion-body">
+                            <div class="container-fluid border" >
+                                <form action="/cri2.2.2" method="POST" enctype = "multipart/form-data">
+                                    <div class="table-responsive">
+                                        <table class="table">
+
+                                            <tbody>
+                                                <tr>
+
+                                                    <th>Certified list of full time teachers along with the departmental affiliation in the latest completed academic year.</th>
+                                                    <td><input class="form-control" id="listteacher" name="listteacher" type="file"></td>
+
+                                                </tr>
+                                                <tr>
+                                                    <th>List showing the number of students across all year in each of the programs in the latest completed academic year.</th>
+                                                    <td><input class="form-control" id="liststudent" name="liststudent" type="file"></td>
+
+                                                </tr>
+
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+                                    <div class="container-fluid pb-2">
+                                        <button class="login100-form-btn w-25">SUBMIT</button>
+                                    </div>
+                                </form>
+
+                                    <div class="table-responsive" >
+                                        <table class="table">
+                                            <thead class="grey lighten-2">
+                                                <tr>
+                                                    <th></th>
+													{%if seskey['type']=='admin'%}
+                                                    <th>Delete</th>{%endif%}
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% if dataset222.count() != 0 %}
+                                            {% for dataset in dataset222%}
+                                            {% if dataset.listteacher%}
+                                            <tr>
+                                                <th>Certified list of full time teachers along with the departmental affiliation in the latest completed academic year.</th>
+                                                <td><a href="static/files/cri222/{{dataset.listteacher}}" ><i class="fa fa-file-pdf-o" style="color:red;font-size:24px;"></i></a></td>
+                                                {%if seskey['type']=='admin'%}
+                                                <td><a href="delcri222/{{dataset['_id']}}"><i class="material-icons" style="font-size:24px;color:red">delete</i></a></td>{%endif%}
+                                            </tr>
+                                            {%endif%}
+                                            {%if dataset.liststudent%}
+                                            <tr>
+                                                <th>List showing the number of students across all year in each of the programs in the latest completed academic year.</th>
+                                                <td><a href="static/files/cri222/{{dataset.liststudent}}" ><i class="fa fa-file-pdf-o" style="color:red;font-size:24px;"></i></a></td>
+                                                    {%if seskey['type']=='admin'%}
+                                                    <td><a href="delcri222/{{dataset['_id']}}"><i class="material-icons" style="font-size:24px;color:red">delete</i></a></td>{%endif%}
+                                            </tr>
+                                            {%endif%}
+                                            {%endfor%}
+                                            {%else%}
+                                            <tr>
+                                                <th>Certified list of full time teachers along with the departmental affiliation in the latest completed academic year.</th>
+                                                <td colspan="7" style="color:red; text-align:center">No data uploaded</td>
+                                            </tr>
+                                            <tr>
+                                                <th>List showing the number of students across all year in each of the programs in the latest completed academic year.</th>
+                                                <td colspan="7" style="color:red; text-align:center">No data uploaded</td>
+                                            </tr>
                                             {%endif%}
                                             </tbody>
                                         </table>

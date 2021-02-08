@@ -130,7 +130,13 @@ iframe {
 	border: none !important;
 }
 
+input[type=file]{
+    width:225px;
+}
 
+select{
+    width:94px;
+}
 /*//////////////////////////////////////////////////////////////////
 [ Utility ]*/
 .txt1 {
@@ -346,7 +352,7 @@ iframe {
   color: #fff;
   text-transform: uppercase;
 
-  width: 100%;
+  width: 130px;
   height: 50px;
   border-radius: 25px;
   background: #57b846;

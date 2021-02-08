@@ -11,7 +11,7 @@ from gnc.models.useradmin import UserAdmin
 
 app = Flask(__name__)
 app.secret_key = "gnc1966"
-app.config['UPLOAD_FOLDER'] = "C:\\Users\\erjkj\\PycharmProjects\\gncdocs\\gnc\\static\\files"
+app.config['UPLOAD_FOLDER'] = "/var/www/gnc/gnc/static/files"
 
 
 @app.route('/login')
@@ -107,7 +107,7 @@ def adminlogin():
 
 @app.route('/auth/adminlogin', methods=['post'])
 def admin_validate():
-    if session['name'] is not None:
+    if session.get('name') is not None:
         return redirect(url_for('admindashboard'))
     else:
         try:
@@ -209,11 +209,15 @@ def cri133():
 
 @app.route('/criteria2')
 def criteria2():
-    if session['name'] is None:
-        return redirect(url_for('login'))
+    if session.get('name') is not None:
+        dataset211 = Database.find('cri211', {})
+        dataset212a=Database.find('cri212a',{})
+        dataset212b = Database.find('cri212b', {})
+        data212b = Database.find('cri212b', {})
+        dataset222 = Database.find('cri222', {})
+        return render_template("criteria2.html", seskey=session, dataset211=dataset211, dataset212a=dataset212a, dataset212b=dataset212b, data212b=data212b, dataset222=dataset222)
     else:
-        dataset211 = Database.find('cri221', {})
-        return render_template("criteria2.html", seskey=session, dataset211=dataset211)
+        return redirect(url_for('login'))
 
 
 @app.route('/cri2.1.1', methods=['POST', 'GET'])
@@ -238,8 +242,76 @@ def cri211():
 
 
 @app.route('/delcri211/<string:id>', methods=['POST', 'GET'])
-def deletecri221(id=None):
+def deletecri211(id=None):
     Database.delete_one("cri211", {'_id': id})
+    return redirect(url_for('criteria2'))
+
+
+@app.route('/cri2.1.2a', methods=['POST','GET'])
+def cri212a():
+    try:
+        f1 = request.files["stategovt"]
+        f1.filename = "stategovt.pdf"
+        f1.save(os.path.join(app.config["UPLOAD_FOLDER"], 'cri212a', f1.filename))
+        Database.insert("cri212a",
+                        {"_id": "" + uuid.uuid4().hex, "id": session['name'], "stategovt":f1.filename})
+        return redirect(url_for('criteria2'))
+    except Exception as e:
+        return render_template("exception.html", e=e)
+
+
+@app.route('/delcri212a/<string:id>', methods=['POST', 'GET'])
+def deletecri212a(id=None):
+    Database.delete_one("cri212a", {'_id': id})
+    return redirect(url_for('criteria2'))
+
+
+@app.route('/cri2.1.2b', methods=['POST', 'GET'])
+def cri212b():
+    try:
+        y = request.form.get('year212b')
+        ns = request.form.get('noseats')
+        f1 = request.files["admissionlist"]
+        f1.filename = "admissionlist_"+y+".pdf"
+        f1.save(os.path.join(app.config["UPLOAD_FOLDER"], 'cri212b', f1.filename))
+        f2 = request.files["admissionextract"]
+        f2.filename = "admissionextract_"+y+".pdf"
+        f2.save(os.path.join(app.config["UPLOAD_FOLDER"], 'cri212b', f2.filename))
+        Database.insert("cri212b",
+                        {"_id": "" + uuid.uuid4().hex, "id": session['name'],"year":y, "noseat":ns, "admissionlist": f1.filename, "admissionextract":f2.filename})
+        return redirect(url_for('criteria2'))
+    except Exception as e:
+        return render_template("exception.html", e=e)
+
+
+@app.route('/delcri212b/<string:id>', methods=['POST', 'GET'])
+def deletecri212b(id=None):
+    Database.delete_one("cri212b", {'_id': id})
+    return redirect(url_for('criteria2'))
+
+
+@app.route('/cri2.2.2', methods=['POST', 'GET'])
+def cri222():
+    try:
+        f1 = request.files["listteacher"]
+        f1.filename = "listteacher.pdf"
+        f1.save(os.path.join(app.config["UPLOAD_FOLDER"], 'cri222', f1.filename))
+        Database.insert("cri222",
+                        {"_id": "" + uuid.uuid4().hex, "id": session['name'], "listteacher": f1.filename})
+
+        f2 = request.files["liststudent"]
+        f2.filename = "liststudent.pdf"
+        f2.save(os.path.join(app.config["UPLOAD_FOLDER"], 'cri222', f2.filename))
+        Database.insert("cri222",
+                        {"_id": "" + uuid.uuid4().hex, "id": session['name'], "liststudent":f2.filename})
+        return redirect(url_for('criteria2'))
+    except Exception as e:
+        return render_template("exception.html", e=e)
+
+
+@app.route('/delcri222/<string:id>', methods=['POST', 'GET'])
+def deletecri222(id=None):
+    Database.delete_one("cri222", {'_id': id})
     return redirect(url_for('criteria2'))
 
 
