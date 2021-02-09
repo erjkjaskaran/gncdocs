@@ -25,17 +25,17 @@
 </head>
 <body>
 <header class="main-header">
-	<div class="row container-fluid" style="overflow:auto;">
-		<div class="float-sm-left">
+	<div class="row container-fluid" style="overflow:hidden;">
+		<div class="col-sm-2 float-sm-left">
 			{%if seskey['type']=='admin'%}
 				<a href="/admindashboard">
 			{%else%}
 				<a href="/main">
 			{%endif%}
-			<img src="{{ url_for('static',filename='images/img-01.png') }}" alt="IMG" width="200" height="60"></a>
+			<img src="{{ url_for('static',filename='images/img-01.png') }}" alt="IMG" height="60px"></a>
 		</div>
-		<div class=" w-75 container-fluid" style="line-height: 60px; height:60px;"><td><p class="w-100 container-fluid" style="text-align:center; font-size:28px; padding:10px 0px 0px 0px;">Hello {{seskey['name']}} {%if seskey['type']=='admin'%} (Admin) {%endif%}</p></td></div>
-		<div class="float-right" style="height:60px; top:20px; "><h2 style="padding:5px 0px 0px 0px;"><a href="/logout">LOGOUT</a></h2></div>
+		<div class="col-sm w-75 container-fluid"><p class="w-100 container-fluid" style="text-align:center; font-size:28px; padding:5px; ">Hello {{seskey['name']}} {%if seskey['type']=='admin'%} (Admin) {%endif%}</p></div>
+		<div class="col-sm-2 float-sm-right" style="height:60px; text-align:right; "><h2 style="padding:5px 0px 0px 0px;"><a href="/logout">LOGOUT</a></h2></div>
 	</div>
 </header>
 {% block content %}
