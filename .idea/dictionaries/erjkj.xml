@@ -6,7 +6,10 @@
       <w>adminextprof</w>
       <w>adminlogin</w>
       <w>adminpage</w>
+      <w>admissionextract</w>
+      <w>admissionlist</w>
       <w>ccode</w>
+      <w>classno</w>
       <w>coursecode</w>
       <w>coursename</w>
       <w>dataset</w>
@@ -16,23 +19,39 @@
       <w>deletecri</w>
       <w>deleteext</w>
       <w>delext</w>
+      <w>documentadmitted</w>
+      <w>documentsanction</w>
       <w>dropdown</w>
       <w>endblock</w>
       <w>endfor</w>
+      <w>erjkj</w>
       <w>extendedprofile</w>
       <w>extendprofile</w>
       <w>extprof</w>
       <w>formm</w>
+      <w>gncdocs</w>
       <w>iframe</w>
       <w>lakhs</w>
+      <w>listmentor</w>
+      <w>liststudent</w>
+      <w>listteacher</w>
+      <w>mentormentee</w>
       <w>mongo</w>
+      <w>namecourse</w>
       <w>nameofbody</w>
       <w>nameofcourse</w>
+      <w>nameofprogram</w>
       <w>nameofstudent</w>
       <w>nameofteacher</w>
       <w>namestudent</w>
       <w>narangwal</w>
+      <w>noadmittedstudent</w>
+      <w>noclass</w>
       <w>nocomputer</w>
+      <w>nosanctionedseat</w>
+      <w>noseat</w>
+      <w>noseats</w>
+      <w>noseminar</w>
       <w>numberpost</w>
       <w>numberseat</w>
       <w>numberstudent</w>
@@ -40,9 +59,15 @@
       <w>pname</w>
       <w>programcode</w>
       <w>programname</w>
+      <w>pycharmprojects</w>
       <w>reemail</w>
+      <w>sanctionedseat</w>
+      <w>seatsanctioned</w>
       <w>selectpicker</w>
       <w>seskey</w>
+      <w>stategovt</w>
+      <w>studentadmitted</w>
+      <w>studentlist</w>
       <w>useradmin</w>
       <w>yearofintroduction</w>
     </words>

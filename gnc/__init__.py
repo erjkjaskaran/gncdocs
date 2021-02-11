@@ -4,14 +4,13 @@ import os
 import flask_login
 from flask import Flask, render_template, request, session, url_for, g
 from werkzeug.utils import redirect
-
 from gnc.common.database import Database
 from gnc.models.User import User
 from gnc.models.useradmin import UserAdmin
 
 app = Flask(__name__)
 app.secret_key = "gnc1966"
-app.config['UPLOAD_FOLDER'] = "/var/www/gnc/gnc/static/files"
+app.config['UPLOAD_FOLDER'] = "c:/users/erjkj/pycharmprojects/gncdocs/gnc/static/files"
 
 
 @app.route('/login')
@@ -22,7 +21,7 @@ def login():
         else:
             return render_template('login.html')
     except Exception as e:
-        return render_template('exception.html', e)
+        return render_template('exception.html', e=e)
 
 
 @app.route('/')
@@ -74,7 +73,6 @@ def login_validate():
         return render_template("dashboard.html", seskey=session)
     else:
         try:
-            error = None
             email = request.form['email']
             password = request.form['pass']
             session['name'] = User.login_validate(email, password)
@@ -91,7 +89,7 @@ def login_validate():
                 error = 'Invalid Password'
                 return render_template('login.html', error=error)
         except Exception as e:
-            return redirect(url_for('login'))
+            return render_template("exception.html", e=e)
 
 
 @app.route('/logout')
@@ -111,7 +109,6 @@ def admin_validate():
         return redirect(url_for('admindashboard'))
     else:
         try:
-            error = None
             email = request.form['email']
             password = request.form['pass']
             admin = UserAdmin.login_validate(email, password)
@@ -128,7 +125,7 @@ def admin_validate():
                 error = 'Invalid Password'
                 return render_template('/adminlogin', error=error)
         except Exception as e:
-            return redirect(url_for('adminlogin'))
+            return render_template("exception.html", e=e)
 
 
 @app.route('/admindashboard')
@@ -150,7 +147,8 @@ def criteria1():
         dataset113 = Database.find("cri113", {})
         dataset132 = Database.find("cri132", {})
         dataset133 = Database.find("cri133", {})
-        return render_template("criteria1.html", seskey=session, dataset113=dataset113, dataset132=dataset132, dataset133=dataset133)
+        return render_template("criteria1.html", seskey=session, dataset113=dataset113, dataset132=dataset132,
+                               dataset133=dataset133)
     else:
         return redirect(url_for('login'))
 
@@ -180,10 +178,11 @@ def cri132():
         cc = request.form.get('coursecode')
         ns = request.form.get('namestudent')
         f = request.files["document"]
-        f.filename = y+"_" + cc + "_" + ns + ".pdf"
+        f.filename = y + "_" + cc + "_" + ns + ".pdf"
         f.save(os.path.join(app.config["UPLOAD_FOLDER"], 'cri132', f.filename))
         Database.insert("cri132",
-                        {"id": session['name'], "year": y, "programcode": pc, "nameofcourse": nc, "coursecode": cc, "nameofstudent": ns, "file": f.filename})
+                        {"id": session['name'], "year": y, "programcode": pc, "nameofcourse": nc, "coursecode": cc,
+                         "nameofstudent": ns, "file": f.filename})
         return redirect(url_for('criteria1'))
     except Exception as e:
         return render_template("exception.html", e=e)
@@ -195,13 +194,14 @@ def cri133():
         pn = request.form.get('programname133')
         pc = request.form.get('programcode133')
         f = request.files["liststudent"]
-        f.filename = pn+"_" + "_" + pc + "_studentlist.pdf"
+        f.filename = pn + "_" + "_" + pc + "_studentlist.pdf"
         f.save(os.path.join(app.config["UPLOAD_FOLDER"], 'cri133', f.filename))
         f1 = request.files["document133"]
         f1.filename = pn + "_" + "_" + pc + "_doc.pdf"
         f1.save(os.path.join(app.config["UPLOAD_FOLDER"], 'cri133', f1.filename))
         Database.insert("cri133",
-                        {"id": session['name'], "nameofprogram": pn,"programcode": pc, "liststudent": f.filename, "file":f1.filename})
+                        {"id": session['name'], "nameofprogram": pn, "programcode": pc, "liststudent": f.filename,
+                         "file": f1.filename})
         return redirect(url_for('criteria1'))
     except Exception as e:
         return render_template("exception.html", e=e)
@@ -211,11 +211,15 @@ def cri133():
 def criteria2():
     if session.get('name') is not None:
         dataset211 = Database.find('cri211', {})
-        dataset212a=Database.find('cri212a',{})
+        dataset212a = Database.find('cri212a', {})
         dataset212b = Database.find('cri212b', {})
         data212b = Database.find('cri212b', {})
         dataset222 = Database.find('cri222', {})
-        return render_template("criteria2.html", seskey=session, dataset211=dataset211, dataset212a=dataset212a, dataset212b=dataset212b, data212b=data212b, dataset222=dataset222)
+        dataset233 = Database.find('cri233', {})
+        dataset233b = Database.find('cri233b', {})
+        return render_template("criteria2.html", seskey=session, dataset211=dataset211, dataset212a=dataset212a,
+                               dataset212b=dataset212b, data212b=data212b, dataset222=dataset222, dataset233=dataset233,
+                               dataset233b=dataset233b)
     else:
         return redirect(url_for('login'))
 
@@ -235,7 +239,9 @@ def cri211():
         f1.filename = pn + "_" + y + "_studentadmitted.pdf"
         f1.save(os.path.join(app.config["UPLOAD_FOLDER"], 'cri211', f1.filename))
         Database.insert("cri211",
-                        {"_id": ""+ uuid.uuid4().hex, "id": session['name'], "year": y, "programname": pn, "programcode": pc, "seatsanctioned": ss, "studentadmitted": sa, "sanction": f.filename, "admitted": f1.filename})
+                        {"_id": "" + uuid.uuid4().hex, "id": session['name'], "year": y, "programname": pn,
+                         "programcode": pc, "seatsanctioned": ss, "studentadmitted": sa, "sanction": f.filename,
+                         "admitted": f1.filename})
         return redirect(url_for('criteria2'))
     except Exception as e:
         return render_template("exception.html", e=e)
@@ -247,14 +253,14 @@ def deletecri211(id=None):
     return redirect(url_for('criteria2'))
 
 
-@app.route('/cri2.1.2a', methods=['POST','GET'])
+@app.route('/cri2.1.2a', methods=['POST', 'GET'])
 def cri212a():
     try:
         f1 = request.files["stategovt"]
         f1.filename = "stategovt.pdf"
         f1.save(os.path.join(app.config["UPLOAD_FOLDER"], 'cri212a', f1.filename))
         Database.insert("cri212a",
-                        {"_id": "" + uuid.uuid4().hex, "id": session['name'], "stategovt":f1.filename})
+                        {"_id": "" + uuid.uuid4().hex, "id": session['name'], "stategovt": f1.filename})
         return redirect(url_for('criteria2'))
     except Exception as e:
         return render_template("exception.html", e=e)
@@ -272,13 +278,14 @@ def cri212b():
         y = request.form.get('year212b')
         ns = request.form.get('noseats')
         f1 = request.files["admissionlist"]
-        f1.filename = "admissionlist_"+y+".pdf"
+        f1.filename = "admissionlist_" + y + ".pdf"
         f1.save(os.path.join(app.config["UPLOAD_FOLDER"], 'cri212b', f1.filename))
         f2 = request.files["admissionextract"]
-        f2.filename = "admissionextract_"+y+".pdf"
+        f2.filename = "admissionextract_" + y + ".pdf"
         f2.save(os.path.join(app.config["UPLOAD_FOLDER"], 'cri212b', f2.filename))
         Database.insert("cri212b",
-                        {"_id": "" + uuid.uuid4().hex, "id": session['name'],"year":y, "noseat":ns, "admissionlist": f1.filename, "admissionextract":f2.filename})
+                        {"_id": "" + uuid.uuid4().hex, "id": session['name'], "year": y, "noseat": ns,
+                         "admissionlist": f1.filename, "admissionextract": f2.filename})
         return redirect(url_for('criteria2'))
     except Exception as e:
         return render_template("exception.html", e=e)
@@ -303,7 +310,7 @@ def cri222():
         f2.filename = "liststudent.pdf"
         f2.save(os.path.join(app.config["UPLOAD_FOLDER"], 'cri222', f2.filename))
         Database.insert("cri222",
-                        {"_id": "" + uuid.uuid4().hex, "id": session['name'], "liststudent":f2.filename})
+                        {"_id": "" + uuid.uuid4().hex, "id": session['name'], "liststudent": f2.filename})
         return redirect(url_for('criteria2'))
     except Exception as e:
         return render_template("exception.html", e=e)
@@ -312,6 +319,31 @@ def cri222():
 @app.route('/delcri222/<string:id>', methods=['POST', 'GET'])
 def deletecri222(id=None):
     Database.delete_one("cri222", {'_id': id})
+    return redirect(url_for('criteria2'))
+
+
+@app.route('/cri2.3.3', methods=['POST', 'GET'])
+def cri233():
+    try:
+        f1 = request.files["mentormentee"]
+        f1.filename = "mentormentee.pdf"
+        f1.save(os.path.join(app.config["UPLOAD_FOLDER"], 'cri233', f1.filename))
+        Database.insert("cri233",
+                        {"_id": "" + uuid.uuid4().hex, "id": session['name'], "mentormentee": f1.filename})
+
+        f2 = request.files["listmentor"]
+        f2.filename = "listmentor.pdf"
+        f2.save(os.path.join(app.config["UPLOAD_FOLDER"], 'cri233', f2.filename))
+        Database.insert("cri233",
+                        {"_id": "" + uuid.uuid4().hex, "id": session['name'], "listmentor": f2.filename})
+        return redirect(url_for('criteria2'))
+    except Exception as e:
+        return render_template("exception.html", e=e)
+
+
+@app.route('/delcri233/<string:id>', methods=['POST', 'GET'])
+def deletecri233(id=None):
+    Database.delete_one("cri233", {'_id': id})
     return redirect(url_for('criteria2'))
 
 
@@ -377,9 +409,12 @@ def extprof():
             dataset42 = Database.find("ext42", {"id": session['name']})
             data42 = Database.find("ext42", {})
             dataset43 = Database.find("ext43", {"id": session['name']})
-            return render_template("extendedprofile.html", seskey=session, dataset=dataset, dataset1=dataset1, data=data,
+            return render_template("extendedprofile.html", seskey=session, dataset=dataset, dataset1=dataset1,
+                                   data=data,
                                    data1=data1, dataset2=dataset2, data11=data11, dataset21=dataset21, data21=data21,
-                                   data31=data31, dataset31=dataset31, data23=data23, dataset23=dataset23, dataset41=dataset41, dataset41p=dataset41p, data12=data12, dataset42=dataset42, data42=data42, dataset43=dataset43)
+                                   data31=data31, dataset31=dataset31, data23=data23, dataset23=dataset23,
+                                   dataset41=dataset41, dataset41p=dataset41p, data12=data12, dataset42=dataset42,
+                                   data42=data42, dataset43=dataset43)
         else:
             return redirect(url_for('main'))
     except Exception as e:
@@ -585,7 +620,6 @@ def deleteext41p(id=None):
 @app.route('/ext4.2', methods=['POST', 'GET'])
 def ext42():
     try:
-
         y = request.form.get('year42')
         n = request.form['expenditure']
         f = request.files["document42"]

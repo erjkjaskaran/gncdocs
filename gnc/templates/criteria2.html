@@ -3,8 +3,6 @@
 
     <div class="limiter">
       <div class="container-login100">
-
-
           <div class="accordion space-20 container-fluid my-2" id="parent211Accordion">
                     <button class="accordion-button text-justify" id="heading211" type="button" data-bs-toggle="collapse" data-bs-target="#collapse211" aria-expanded="false" aria-controls="collapse211">
                         <strong>2.1.1</strong> Enrolment of students in last five years.
@@ -345,19 +343,156 @@
                         </div>
                     </div>
           </div>
+          <div class="accordion space-20 container-fluid my-2" id="parent233Accordion">
+                    <button class="accordion-button text-justify" id="heading233" type="button" data-bs-toggle="collapse" data-bs-target="#collapse233" aria-expanded="false" aria-controls="collapse233">
+                        <strong>2.3.3 (a) </strong> Ratio of mentor to students for academic and other related issues (Data for the latest completed academic year )
+                    </button>
+                    <div id="collapse233" class="accordion-collapse collapse container-fluid mt-2" aria-labelledby="heading233" data-bs-parent="#parent233Accordion">
+                        <div class="accordion-body">
+                            <div class="container-fluid border" >
+                                <form action="/cri2.3.3" method="POST" enctype = "multipart/form-data">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <tbody>
+                                                <tr>
+                                                    <th>Copy of circular pertaining the details of mentor and their allotted mentees.</th>
+                                                    <td><input class="form-control" id="mentormentee" name="mentormentee" type="file"></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Approved Mentor list as announced by the HEI</th>
+                                                    <td><input class="form-control" id="listmentor" name="listmentor" type="file"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="container-fluid pb-2">
+                                        <button class="login100-form-btn w-25">SUBMIT</button>
+                                    </div>
+                                </form>
+                                <div class="table-responsive" >
+                                   <table class="table">
+                                      <thead class="grey lighten-2">
+                                          <tr>
+                                              <th></th>
+    											{%if seskey['type']=='admin'%}
+                                                <th>Delete</th>{%endif%}
+                                          </tr>
+                                      </thead>
+                                      <tbody>
+                                          {% if dataset233.count() != 0 %}
+                                            {% for dataset in dataset233%}
+                                            {% if dataset.mentormentee%}
+                                            <tr>
+                                                <th>Copy of circular pertaining the details of mentor and their allotted mentees.</th>
+                                                <td><a href="static/files/cri233/{{dataset.mentormentee}}" ><i class="fa fa-file-pdf-o" style="color:red;font-size:24px;"></i></a></td>
+                                                {%if seskey['type']=='admin'%}
+                                                <td><a href="delcri233/{{dataset['_id']}}"><i class="material-icons" style="font-size:24px;color:red">delete</i></a></td>{%endif%}
+                                            </tr>
+                                            {%endif%}
+                                          {%if dataset.listmentor%}
+                                          <tr>
+                                             <th>Approved Mentor list as announced by the HEI</th>
+                                             <td><a href="static/files/cri233/{{dataset.listmentor}}" ><i class="fa fa-file-pdf-o" style="color:red;font-size:24px;"></i></a></td>
+                                             {%if seskey['type']=='admin'%}
+                                             <td><a href="delcri233/{{dataset['_id']}}"><i class="material-icons" style="font-size:24px;color:red">delete</i></a></td>{%endif%}
+                                          </tr>
+                                          {%endif%}
+                                          {%endfor%}
+                                          {%else%}
+                                            <tr>
+                                                <th>Certified list of full time teachers along with the departmental affiliation in the latest completed academic year.</th>
+                                                <td colspan="7" style="color:red; text-align:center">No data uploaded</td>
+                                            </tr>
+                                            <tr>
+                                                <th>List showing the number of students across all year in each of the programs in the latest completed academic year.</th>
+                                                <td colspan="7" style="color:red; text-align:center">No data uploaded</td>
+                                            </tr>
+                                            {%endif%}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+          </div>
+          <div class="accordion space-20 container-fluid my-2" id="parent233bAccordion">
+                    <button class="accordion-button text-justify" id="heading233b" type="button" data-bs-toggle="collapse" data-bs-target="#collapse233b" aria-expanded="false" aria-controls="collapse233b">
+                        <strong>2.3.3 (b)</strong> Ratio of mentor to students for academic and other related issues (Data for the latest completed academic year )
+                    </button>
+                    <div id="collapse233b" class="accordion-collapse collapse container-fluid mt-2" aria-labelledby="heading233b" data-bs-parent="#parent233bAccordion">
+                        <div class="accordion-body">
+                            <div class="container-fluid border" >
+                                <form action="/cri2.3.3b" method="POST" enctype = "multipart/form-data">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <tbody>
+                                                <tr>
+                                                    <th>Name of the mentor</th>
+                                                    <th>Issues raised and resolved</th>
+                                                    <th></th>
+                                                </tr>
+                                                <tr>
+                                                    <td><input class="form-control" id="mentor" name="mentor" type="text"></td>
+                                                    <td><input class="form-control" id="issue" name="issue" type="file"></td>
+                                                    <td><button class="login100-form-btn ">SUBMIT</button></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
 
+                                </form>
+                                <div class="table-responsive" >
+                                   <table class="table">
+                                      <thead class="grey lighten-2">
+                                          <tr>
+                                              <th></th>
+    											{%if seskey['type']=='admin'%}
+                                                <th>Delete</th>{%endif%}
+                                          </tr>
+                                      </thead>
+                                      <tbody>
+                                          {% if dataset233b.count() != 0 %}
+                                            {% for dataset in dataset233b%}
+                                            {% if dataset.mentormentee%}
+                                            <tr>
+                                                <th>Copy of circular pertaining the details of mentor and their allotted mentees.</th>
+                                                <td><a href="static/files/cri233b/{{dataset.mentormentee}}" ><i class="fa fa-file-pdf-o" style="color:red;font-size:24px;"></i></a></td>
+                                                {%if seskey['type']=='admin'%}
+                                                <td><a href="delcri233b/{{dataset['_id']}}"><i class="material-icons" style="font-size:24px;color:red">delete</i></a></td>{%endif%}
+                                            </tr>
+                                            {%endif%}
+                                          {%if dataset.listmentor%}
+                                          <tr>
+                                             <th>Approved Mentor list as announced by the HEI</th>
+                                             <td><a href="static/files/cri233b/{{dataset.listmentor}}" ><i class="fa fa-file-pdf-o" style="color:red;font-size:24px;"></i></a></td>
+                                             {%if seskey['type']=='admin'%}
+                                             <td><a href="delcri233b/{{dataset['_id']}}"><i class="material-icons" style="font-size:24px;color:red">delete</i></a></td>{%endif%}
+                                          </tr>
+                                          {%endif%}
+                                          {%endfor%}
+                                          {%else%}
+                                            <tr>
+                                                <th>Certified list of full time teachers along with the departmental affiliation in the latest completed academic year.</th>
+                                                <td colspan="7" style="color:red; text-align:center">No data uploaded</td>
+                                            </tr>
+                                            <tr>
+                                                <th>List showing the number of students across all year in each of the programs in the latest completed academic year.</th>
+                                                <td colspan="7" style="color:red; text-align:center">No data uploaded</td>
+                                            </tr>
+                                            {%endif%}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+          </div>
       </div>
-
       </div>
     <script src="{{ url_for('static',filename='vendor/jquery/jquery-3.2.1.min.js')}}"></script>
-
 	<script src="{{ url_for('static',filename='vendor/bootstrap/js/popper.js') }}"></script>
 	<script src="{{ url_for('static',filename='vendor/bootstrap/js/bootstrap.min.js') }}"></script>
-
 	<script src="{{ url_for('static',filename='vendor/select2/select2.min.js') }}"></script>
-
 	<script src="{{ url_for('static',filename='vendor/tilt/tilt.jquery.min.js') }}"></script>
-
-
 	<script src="{{ url_for('static',filename='js/main.js') }}"></script>
 {% endblock%}
