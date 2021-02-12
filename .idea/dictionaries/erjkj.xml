@@ -14,11 +14,13 @@
       <w>coursename</w>
       <w>dataset</w>
       <w>datasets</w>
+      <w>dateofappointment</w>
       <w>dbgncdocs</w>
       <w>delcri</w>
       <w>deletecri</w>
       <w>deleteext</w>
       <w>delext</w>
+      <w>divyangjan</w>
       <w>documentadmitted</w>
       <w>documentsanction</w>
       <w>dropdown</w>
@@ -28,13 +30,16 @@
       <w>extendedprofile</w>
       <w>extendprofile</w>
       <w>extprof</w>
+      <w>facultyname</w>
       <w>formm</w>
       <w>gncdocs</w>
       <w>iframe</w>
       <w>lakhs</w>
+      <w>listfulltime</w>
       <w>listmentor</w>
       <w>liststudent</w>
       <w>listteacher</w>
+      <w>litt</w>
       <w>mentormentee</w>
       <w>mongo</w>
       <w>namecourse</w>
@@ -62,13 +67,16 @@
       <w>pycharmprojects</w>
       <w>reemail</w>
       <w>sanctionedseat</w>
+      <w>sanctionpost</w>
       <w>seatsanctioned</w>
       <w>selectpicker</w>
       <w>seskey</w>
       <w>stategovt</w>
       <w>studentadmitted</w>
       <w>studentlist</w>
+      <w>superspeciality</w>
       <w>useradmin</w>
+      <w>yearaward</w>
       <w>yearofintroduction</w>
     </words>
   </dictionary>

@@ -374,6 +374,7 @@
                                       <thead class="grey lighten-2">
                                           <tr>
                                               <th></th>
+                                              <th></th>
     											{%if seskey['type']=='admin'%}
                                                 <th>Delete</th>{%endif%}
                                           </tr>
@@ -400,11 +401,11 @@
                                           {%endfor%}
                                           {%else%}
                                             <tr>
-                                                <th>Certified list of full time teachers along with the departmental affiliation in the latest completed academic year.</th>
+                                                <th>Copy of circular pertaining the details of mentor and their allotted mentees.</th>
                                                 <td colspan="7" style="color:red; text-align:center">No data uploaded</td>
                                             </tr>
                                             <tr>
-                                                <th>List showing the number of students across all year in each of the programs in the latest completed academic year.</th>
+                                                <th>Approved Mentor list as announced by the HEI</th>
                                                 <td colspan="7" style="color:red; text-align:center">No data uploaded</td>
                                             </tr>
                                             {%endif%}
@@ -445,38 +446,24 @@
                                    <table class="table">
                                       <thead class="grey lighten-2">
                                           <tr>
-                                              <th></th>
-    											{%if seskey['type']=='admin'%}
+                                              <th>Name of the mentor</th>
+                                              <th>Issues raised and resolved</th>
+                                              {%if seskey['type']=='admin'%}
                                                 <th>Delete</th>{%endif%}
                                           </tr>
                                       </thead>
                                       <tbody>
                                           {% if dataset233b.count() != 0 %}
                                             {% for dataset in dataset233b%}
-                                            {% if dataset.mentormentee%}
                                             <tr>
-                                                <th>Copy of circular pertaining the details of mentor and their allotted mentees.</th>
+                                                <td></td>
                                                 <td><a href="static/files/cri233b/{{dataset.mentormentee}}" ><i class="fa fa-file-pdf-o" style="color:red;font-size:24px;"></i></a></td>
                                                 {%if seskey['type']=='admin'%}
                                                 <td><a href="delcri233b/{{dataset['_id']}}"><i class="material-icons" style="font-size:24px;color:red">delete</i></a></td>{%endif%}
                                             </tr>
-                                            {%endif%}
-                                          {%if dataset.listmentor%}
-                                          <tr>
-                                             <th>Approved Mentor list as announced by the HEI</th>
-                                             <td><a href="static/files/cri233b/{{dataset.listmentor}}" ><i class="fa fa-file-pdf-o" style="color:red;font-size:24px;"></i></a></td>
-                                             {%if seskey['type']=='admin'%}
-                                             <td><a href="delcri233b/{{dataset['_id']}}"><i class="material-icons" style="font-size:24px;color:red">delete</i></a></td>{%endif%}
-                                          </tr>
-                                          {%endif%}
-                                          {%endfor%}
+                                            {%endfor%}
                                           {%else%}
                                             <tr>
-                                                <th>Certified list of full time teachers along with the departmental affiliation in the latest completed academic year.</th>
-                                                <td colspan="7" style="color:red; text-align:center">No data uploaded</td>
-                                            </tr>
-                                            <tr>
-                                                <th>List showing the number of students across all year in each of the programs in the latest completed academic year.</th>
                                                 <td colspan="7" style="color:red; text-align:center">No data uploaded</td>
                                             </tr>
                                             {%endif%}
@@ -487,6 +474,294 @@
                         </div>
                     </div>
           </div>
+          <div class="accordion space-20 container-fluid my-2" id="parent241Accordion">
+                    <button class="accordion-button text-justify" id="heading241" type="button" data-bs-toggle="collapse" data-bs-target="#collapse241" aria-expanded="false" aria-controls="collapse241">
+                        <strong>2.4.1  </strong> Average percentage of full time teachers against sanctioned posts during the last five years.
+                    </button>
+                    <div id="collapse241" class="accordion-collapse collapse container-fluid mt-2" aria-labelledby="heading241" data-bs-parent="#parent241Accordion">
+                        <div class="accordion-body">
+                            <div class="container-fluid border" >
+                                <form action="/cri2.4.1" method="POST" enctype = "multipart/form-data">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <tbody>
+                                                <tr>
+                                                    <th>Sanction letters indicating number of posts (including Management sanctioned posts) by competent authority.</th>
+                                                    <td><input class="form-control" id="sanctionpost" name="sanctionpost" type="file"></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>List of full time teachers appointed along with their departmental affiliation.</th>
+                                                    <td><input class="form-control" id="listfulltime" name="listfulltime" type="file"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="container-fluid pb-2">
+                                        <button class="login100-form-btn w-25">SUBMIT</button>
+                                    </div>
+                                </form>
+                                <div class="table-responsive" >
+                                   <table class="table">
+                                      <thead class="grey lighten-2">
+                                          <tr>
+                                              <th></th>
+                                              <th></th>
+    											{%if seskey['type']=='admin'%}
+                                                <th>Delete</th>{%endif%}
+                                          </tr>
+                                      </thead>
+                                      <tbody>
+                                          {% if dataset241.count() != 0 %}
+                                            {% for dataset in dataset241%}
+                                            {% if dataset.sanctionpost%}
+                                            <tr>
+                                                <th>Sanction letters indicating number of posts (including Management sanctioned posts) by competent authority.</th>
+                                                <td><a href="static/files/cri241/{{dataset.sanctionpost}}" ><i class="fa fa-file-pdf-o" style="color:red;font-size:24px;"></i></a></td>
+                                                {%if seskey['type']=='admin'%}
+                                                <td><a href="delcri241/{{dataset['_id']}}"><i class="material-icons" style="font-size:24px;color:red">delete</i></a></td>{%endif%}
+                                            </tr>
+                                            {%endif%}
+                                          {%if dataset.listfulltime%}
+                                          <tr>
+                                             <th>List of full time teachers appointed along with their departmental affiliation.</th>
+                                             <td><a href="static/files/cri241/{{dataset.listfulltime}}" ><i class="fa fa-file-pdf-o" style="color:red;font-size:24px;"></i></a></td>
+                                             {%if seskey['type']=='admin'%}
+                                             <td><a href="delcri241/{{dataset['_id']}}"><i class="material-icons" style="font-size:24px;color:red">delete</i></a></td>{%endif%}
+                                          </tr>
+                                          {%endif%}
+                                          {%endfor%}
+                                          {%else%}
+                                            <tr>
+                                                <th>Sanction letters indicating number of posts (including Management sanctioned posts) by competent authority.</th>
+                                                <td colspan="7" style="color:red; text-align:center">No data uploaded</td>
+                                            </tr>
+                                            <tr>
+                                                <th>List of full time teachers appointed along with their departmental affiliation.</th>
+                                                <td colspan="7" style="color:red; text-align:center">No data uploaded</td>
+                                            </tr>
+                                            {%endif%}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+          </div>
+          <div class="accordion space-20 container-fluid my-2" id="parent242Accordion">
+                    <button class="accordion-button text-justify" id="heading242" type="button" data-bs-toggle="collapse" data-bs-target="#collapse242" aria-expanded="false" aria-controls="collapse242">
+                        <strong>2.4.2 </strong> Full time teachers with Ph. D./ D.M./ M.Ch./ D.N.B Superspeciality/ D.Sc./ D.Litt. during the last five years
+                    </button>
+                    <div id="collapse242" class="accordion-collapse collapse container-fluid mt-2" aria-labelledby="heading242" data-bs-parent="#parent242Accordion">
+                        <div class="accordion-body">
+                            <div class="container-fluid border" >
+                                <form action="/cri2.4.2" method="POST" enctype = "multipart/form-data">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead class="grey lighten-2">
+                                                <tr>
+                                                    <th >Session</th>
+                                                    <th class="w-25">Name of faculty</th>
+                                                    <th class="w-25">Qualification (Ph. D./ D.M./ M.Ch./ D.N.B Superspeciality/ D.Sc./ D.Litt)</th>
+													<th class="w-25">Year of Award</th>
+                                                    <th class="w-25">Upload Certificate</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <select class="selectpicker form-control" id="session" name="session" style="width:94px;">
+                                                            <option>Select</option>
+                                                            {%for i in ['2015-16','2016-17','2017-18','2018-19','2019-20','2020-21','2021-22','2022-23','2023-24', '2024-25','2025-26']%}
+                                                               <option>{{i}}</option>
+															{%endfor%}
+                                                        </select>
+                                                    </td>
+                                                    <td><input class="form-control" id="facultyname" name="facultyname" type="text"></td>
+													<td><input class="form-control" id="qualification" name="qualification" type="text"></td>
+                                                    <td><input class="form-control" id="yearaward" name="yearaward" type="text"></td>
+                                                    <td colspan="2"><input type="file" class="form-control-file border" id="document242" name="document242"></td>
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="container-fluid pb-2">
+                                        <button class="login100-form-btn w-25">SUBMIT</button>
+                                    </div>
+                                </form>
+
+                                    <div class="table-responsive" >
+                                        <table class="table">
+                                            <thead class="grey lighten-2">
+                                                <tr>
+                                                    <th class="w-25">Name of faculty</th>
+                                                    <th class="w-25">Qualification (Ph. D. / D.M. / M.Ch. / D.N.B Superspeciality / D.Sc. / D.Litt)</th>
+													<th class="w-25">Year of Award</th>
+                                                    <th class="w-25">Certificate</th>
+                                                    {%if seskey['type']=='admin'%}
+                                                    <th>Delete</th>{%endif%}
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% if dataset242.count() != 0 %}
+                                            {% for dataset in dataset242%}
+                                                <tr>
+                                                    <td>{{dataset['session']}}</td>
+                                                    <td>{{dataset['facultyname']}}</td>
+                                                    <td>{{dataset['qualification']}}</td>
+                                                    <td>{{dataset['yearaward']}}</td>
+                                                    <td><a href="static/files/cri242/{{dataset.document}}" ><i class="fa fa-file-pdf-o" style="color:red;font-size:24px;"></i></a></td>
+                                                    {%if seskey['type']=='admin'%}
+                                                    <td><a href="delcri242/{{dataset['_id']}}"><i class="material-icons" style="font-size:24px;color:red">delete</i></a></td>{%endif%}
+                                                </tr>
+                                            {% endfor %}
+                                            {%else%}
+                                                <tr>
+                                                    <td colspan="7" style="color:red; text-align:center">No data uploaded</td>
+                                                </tr>
+                                            {%endif%}
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+          </div>
+          <div class="accordion space-20 container-fluid my-2" id="parent243Accordion">
+                    <button class="accordion-button text-justify" id="heading243" type="button" data-bs-toggle="collapse" data-bs-target="#collapse243" aria-expanded="false" aria-controls="collapse243">
+                        <strong>2.4.3 </strong>  Teaching experience of full time teachers in the same institution (Data for the latest completed academic year in number of years).
+                    </button>
+                    <div id="collapse243" class="accordion-collapse collapse container-fluid mt-2" aria-labelledby="heading243" data-bs-parent="#parent243Accordion">
+                        <div class="accordion-body">
+                            <div class="container-fluid border" >
+                                <form action="/cri2.4.3" method="POST" enctype = "multipart/form-data">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead class="grey lighten-2">
+                                                <tr>
+                                                    <th class="w-25">Name of faculty</th>
+                                                    <th class="w-25">Date of Appointment</th>
+													<th class="w-25">Experience in the Institution</th>
+                                                    <th class="w-25">Upload Appointment Letter/ Experience Certificate</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><input class="form-control" id="facultyname243" name="facultyname243" type="text"></td>
+													<td><input class="form-control" id="dateofappointment" name="dateofappointment" type="date"></td>
+                                                    <td><input class="form-control" id="experience" name="experience" type="text"></td>
+                                                    <td colspan="2"><input type="file" class="form-control-file border" id="document243" name="document243"></td>
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="container-fluid pb-2">
+                                        <button class="login100-form-btn w-25">SUBMIT</button>
+                                    </div>
+                                </form>
+
+                                    <div class="table-responsive" >
+                                        <table class="table">
+                                            <thead class="grey lighten-2">
+                                                <tr>
+                                                    <th class="w-25">Name of faculty</th>
+                                                    <th class="w-25">Date of Appointment</th>
+													<th class="w-25">Experience in the Institution</th>
+                                                    <th class="w-25">Appointment Letter/ Experience Certificate</th>
+                                                    {%if seskey['type']=='admin'%}
+                                                    <th>Delete</th>{%endif%}
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% if dataset243.count() != 0 %}
+                                            {% for dataset in dataset243%}
+                                                <tr>
+                                                    <td>{{dataset['facultyname']}}</td>
+                                                    <td>{{dataset['dateofappointment']}}</td>
+                                                    <td>{{dataset['experience']}}</td>
+                                                    <td><a href="static/files/cri243/{{dataset.document}}" ><i class="fa fa-file-pdf-o" style="color:red;font-size:24px;"></i></a></td>
+                                                    {%if seskey['type']=='admin'%}
+                                                    <td><a href="delcri243/{{dataset['_id']}}"><i class="material-icons" style="font-size:24px;color:red">delete</i></a></td>{%endif%}
+                                                </tr>
+                                            {% endfor %}
+                                            {%else%}
+                                                <tr>
+                                                    <td colspan="7" style="color:red; text-align:center">No data uploaded</td>
+                                                </tr>
+                                            {%endif%}
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+          </div>
+          <div class="accordion space-20 container-fluid my-2" id="parent263Accordion">
+                    <button class="accordion-button text-justify" id="heading263" type="button" data-bs-toggle="collapse" data-bs-target="#collapse263" aria-expanded="false" aria-controls="collapse263">
+                        <strong>2.6.3</strong> Ratio of mentor to students for academic and other related issues (Data for the latest completed academic year )
+                    </button>
+                    <div id="collapse263" class="accordion-collapse collapse container-fluid mt-2" aria-labelledby="heading263" data-bs-parent="#parent263Accordion">
+                        <div class="accordion-body">
+                            <div class="container-fluid border" >
+                                <form action="/cri2.6.3" method="POST" enctype = "multipart/form-data">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <tbody>
+                                                <tr>
+                                                    <th>Year</th>
+                                                    <th>Program Name</th>
+                                                    <th>Result sheet published by the affiliating university attested by the principal.</th>
+                                                    <th></th>
+                                                </tr>
+                                                <tr>
+                                                    <td><input class="form-control" id="year263" name="year263" type="text"></td>
+                                                    <td><input class="form-control" id="programname263" name="programname263" type="text"></td>
+                                                    <td><input class="form-control" id="result" name="result" type="file"></td>
+                                                    <td><button class="login100-form-btn ">SUBMIT</button></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </form>
+                                <div class="table-responsive" >
+                                   <table class="table">
+                                      <thead class="grey lighten-2">
+                                          <tr>
+                                              <th>Year</th>
+                                              <th>Program Name</th>
+                                              <th>Result sheet published by the affiliating university attested by the principal.</th>
+                                              {%if seskey['type']=='admin'%}
+                                                <th>Delete</th>{%endif%}
+                                          </tr>
+                                      </thead>
+                                      <tbody>
+                                          {% if dataset263.count() != 0 %}
+                                            {% for dataset in dataset263%}
+                                            <tr>
+                                                <td>{{dataset['year']}}</td>
+                                                <td>{{dataset['programname']}}</td>
+                                                <td><a href="static/files/cri263/{{dataset.result}}" ><i class="fa fa-file-pdf-o" style="color:red;font-size:24px;"></i></a></td>
+                                                {%if seskey['type']=='admin'%}
+                                                <td><a href="delcri263/{{dataset['_id']}}"><i class="material-icons" style="font-size:24px;color:red">delete</i></a></td>{%endif%}
+                                            </tr>
+                                            {%endfor%}
+                                          {%else%}
+                                            <tr>
+                                                <td colspan="7" style="color:red; text-align:center">No data uploaded</td>
+                                            </tr>
+                                            {%endif%}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+          </div>
+
       </div>
       </div>
     <script src="{{ url_for('static',filename='vendor/jquery/jquery-3.2.1.min.js')}}"></script>

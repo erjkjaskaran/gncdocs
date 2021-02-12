@@ -217,9 +217,13 @@ def criteria2():
         dataset222 = Database.find('cri222', {})
         dataset233 = Database.find('cri233', {})
         dataset233b = Database.find('cri233b', {})
+        dataset241 = Database.find('cri241', {})
+        dataset242 = Database.find('cri242', {})
+        dataset243 = Database.find('cri243', {})
+        dataset263 = Database.find('cri263', {})
         return render_template("criteria2.html", seskey=session, dataset211=dataset211, dataset212a=dataset212a,
                                dataset212b=dataset212b, data212b=data212b, dataset222=dataset222, dataset233=dataset233,
-                               dataset233b=dataset233b)
+                               dataset233b=dataset233b, dataset241=dataset241, dataset242=dataset242, dataset243=dataset243, dataset263=dataset263)
     else:
         return redirect(url_for('login'))
 
@@ -344,6 +348,26 @@ def cri233():
 @app.route('/delcri233/<string:id>', methods=['POST', 'GET'])
 def deletecri233(id=None):
     Database.delete_one("cri233", {'_id': id})
+    return redirect(url_for('criteria2'))
+
+
+@app.route('/cri2.3.3b', methods=['POST', 'GET'])
+def cri233b():
+    try:
+        mn = request.form.get('mentor')
+        f2 = request.files["issue"]
+        f2.filename = mn + "_issue.pdf"
+        f2.save(os.path.join(app.config["UPLOAD_FOLDER"], 'cri233b', f2.filename))
+        Database.insert("cri233b",
+                        {"_id": "" + uuid.uuid4().hex, "id": session['name'], "mentor": mn, "issue": f2.filename})
+        return redirect(url_for('criteria2'))
+    except Exception as e:
+        return render_template("exception.html", e=e)
+
+
+@app.route('/delcri233b/<string:id>', methods=['POST', 'GET'])
+def deletecri233b(id=None):
+    Database.delete_one("cri233b", {'_id': id})
     return redirect(url_for('criteria2'))
 
 
