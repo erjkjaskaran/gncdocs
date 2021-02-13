@@ -371,6 +371,100 @@ def deletecri233b(id=None):
     return redirect(url_for('criteria2'))
 
 
+@app.route('/cri2.4.1', methods=['POST', 'GET'])
+def cri241():
+    try:
+        f1 = request.files["sanctionpost"]
+        f1.filename = "sanctionedpost.pdf"
+        f1.save(os.path.join(app.config["UPLOAD_FOLDER"], 'cri241', f1.filename))
+        Database.insert("cri241",
+                        {"_id": "" + uuid.uuid4().hex, "id": session['name'], "sanctionpost": f1.filename})
+
+        f2 = request.files["listfulltime"]
+        f2.filename = "listfulltime.pdf"
+        f2.save(os.path.join(app.config["UPLOAD_FOLDER"], 'cri241', f2.filename))
+        Database.insert("cri241",
+                        {"_id": "" + uuid.uuid4().hex, "id": session['name'], "listfulltime": f2.filename})
+        return redirect(url_for('criteria2'))
+    except Exception as e:
+        return render_template("exception.html", e=e)
+
+
+@app.route('/delcri241/<string:id>', methods=['POST', 'GET'])
+def deletecri241(id=None):
+    Database.delete_one("cri241", {'_id': id})
+    return redirect(url_for('criteria2'))
+
+
+@app.route('/cri2.4.2', methods=['POST', 'GET'])
+def cri242():
+    try:
+        s = request.form.get('session')
+        fn = request.form.get('facultyname')
+        q = request.form.get('qualification')
+        ya = request.form.get('yearaward')
+        f1 = request.files["document242"]
+        f1.filename = fn + "_" + q + ".pdf"
+        f1.save(os.path.join(app.config["UPLOAD_FOLDER"], 'cri242', f1.filename))
+        Database.insert("cri242",
+                        {"_id": "" + uuid.uuid4().hex, "id": session['name'], "session": s, "facultyname": fn, "qualification": q, "yearaward": ya,
+                         "document": f1.filename})
+        return redirect(url_for('criteria2'))
+    except Exception as e:
+        return render_template("exception.html", e=e)
+
+
+@app.route('/delcri242/<string:id>', methods=['POST', 'GET'])
+def deletecri242(id=None):
+    Database.delete_one("cri242", {'_id': id})
+    return redirect(url_for('criteria2'))
+
+
+@app.route('/cri2.4.3', methods=['POST', 'GET'])
+def cri243():
+    try:
+        fn = request.form.get('facultyname243')
+        da = request.form.get('dateofappointment')
+        e = request.form.get('experience')
+        f1 = request.files["document243"]
+        f1.filename = fn + "_experience.pdf"
+        f1.save(os.path.join(app.config["UPLOAD_FOLDER"], 'cri243', f1.filename))
+        Database.insert("cri243",
+                        {"_id": "" + uuid.uuid4().hex, "id": session['name'], "facultyname": fn, "dateofappointment": da, "experience": e,
+                         "document": f1.filename})
+        return redirect(url_for('criteria2'))
+    except Exception as e:
+        return render_template("exception.html", e=e)
+
+
+@app.route('/delcri243/<string:id>', methods=['POST', 'GET'])
+def deletecri243(id=None):
+    Database.delete_one("cri243", {'_id': id})
+    return redirect(url_for('criteria2'))
+
+
+@app.route('/cri2.6.3', methods=['POST', 'GET'])
+def cri263():
+    try:
+        y = request.form.get('year263')
+        pn = request.form.get('programname263')
+        f1 = request.files["result"]
+        f1.filename = "result" + y + ".pdf"
+        f1.save(os.path.join(app.config["UPLOAD_FOLDER"], 'cri263', f1.filename))
+        Database.insert("cri263",
+                        {"_id": "" + uuid.uuid4().hex, "id": session['name'], "year": y, "programname": pn,
+                         "result": f1.filename})
+        return redirect(url_for('criteria2'))
+    except Exception as e:
+        return render_template("exception.html", e=e)
+
+
+@app.route('/delcri263/<string:id>', methods=['POST', 'GET'])
+def deletecri263(id=None):
+    Database.delete_one("cri263", {'_id': id})
+    return redirect(url_for('criteria2'))
+
+
 @app.route('/criteria3')
 def criteria3():
     if session['name'] is None:
