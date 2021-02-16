@@ -25,6 +25,11 @@ def login():
 
 
 @app.route('/')
+def root():
+    return redirect(url_for('main'))
+
+
+@app.route('/naac')
 def main():
     return render_template("main.html")
 
@@ -70,26 +75,32 @@ def faculty_register():
 @app.route('/main', methods=['post', 'get'])
 def login_validate():
     if session.get('name') is not None:
+        print("ABC")
         return render_template("dashboard.html", seskey=session)
     else:
         try:
             email = request.form['email']
-            password = request.form['pass']
-            session['name'] = User.login_validate(email, password)
-            if session['name'] is not None:
-                User.login(email)
-                session.permanent = True
-                app.permanent_session_lifetime = timedelta(minutes=10)
-                session.modified = True
-                g.user = flask_login.current_user
-                return render_template("dashboard.html", seskey=session)
+            if email is not None:
+                password = request.form['pass']
+                session['name'] = User.login_validate(email, password)
+
+                if session['name'] is not None:
+                    User.login(email)
+                    session.permanent = True
+                    app.permanent_session_lifetime = timedelta(minutes=10)
+                    session.modified = True
+                    g.user = flask_login.current_user
+                    return render_template("dashboard.html", seskey=session)
+                else:
+                    session['email'] = None
+                    session['name'] = None
+                    error = 'Invalid Password'
+                    return render_template('login.html', error=error)
             else:
-                session['email'] = None
-                session['name'] = None
-                error = 'Invalid Password'
-                return render_template('login.html', error=error)
+                return render_template('login.html')
         except Exception as e:
-            return render_template("exception.html", e=e)
+            session['name'] = None
+            return render_template("login.html", e=e)
 
 
 @app.route('/logout')
@@ -467,18 +478,21 @@ def deletecri263(id=None):
 
 @app.route('/criteria3')
 def criteria3():
-    if session['name'] is None:
-        return redirect(url_for('login'))
-    else:
+    if session.get('name') is not None:
         return render_template("criteria3.html", seskey=session)
+    else:
+        return redirect(url_for('login'))
 
 
 @app.route('/criteria4')
 def criteria4():
-    if session['name'] is None:
-        return redirect(url_for('login'))
+    if session.get('name') is not None:
+        dataset413 = Database.find('cri413', {})
+        dataset414 = Database.find('cri414', {})
+        dataset422 = Database.find('cri422', {})
+        return render_template("criteria4.html", seskey=session, dataset413=dataset413, dataset414=dataset414, dataset422=dataset422)
     else:
-        return render_template("criteria4.html", seskey=session)
+        return redirect(url_for('login'))
 
 
 @app.route('/criteria5')

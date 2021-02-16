@@ -1,10 +1,287 @@
-{% extends "base.html" %}
+{% extends "base2.html" %}
 {% block content%}
 
     <div class="limiter">
       <div class="container-login100">
 
-        <div class="space-20"> This is Criterion 4: Infrastructure and Learning Resources </div>
+        <div class="accordion space-20 container-fluid my-2" id="parent413Accordion">
+                    <button class="accordion-button" id="heading413" type="button" data-bs-toggle="collapse" data-bs-target="#collapse413" aria-expanded="false" aria-controls="collapse413">
+                        <strong>4.1.3</strong> Classrooms and seminar halls with ICT enabled facilities such as smart class, LMS, etc.
+                    </button>
+                    <div id="collapse413" class="accordion-collapse collapse container-fluid mt-2" aria-labelledby="heading413" data-bs-parent="#parent413Accordion">
+                        <div class="accordion-body">
+                            <div class="container-fluid border" >
+                                <form action="/cri4.1.3" method="POST" enctype = "multipart/form-data">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th>Classroom No./ Seminar Hall No.</th>
+                                                <th>Geo Tagged Photo</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="1"><input class="form-control" id="classno" name="classno" type="text"></td>
+                                                    <td colspan="2"><input type="file" class="form-control-file border" id="doc413" name="doc413"></td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="container-fluid">
+                                        <button class="login100-form-btn w-25">SUBMIT</button>
+                                    </div>
+                                </form>
+
+                                <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th>Classroom No./ Seminar Hall No.</th>
+                                                <th>Geo Tagged Photo</th>
+                                                {%if seskey['type']=='admin'%}
+                                                <th>Delete</th>
+                                                {%endif%}
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+
+                                            <tr>
+                                                {%if dataset413.count()!=0%}
+                                                    {%for dataset in dataset413%}
+                                                    <td>{{dataset['classno']}}</td>
+                                                    <td><a href="static/files/cri413/{{dataset.pic}}" ><i class="fa fa-file-pdf-o" style="color:red;font-size:24px;"></i></a></td>
+                                                    {%if seskey['type']=='admin'%}
+                                                        <td><a href="delcri413/{{dataset['_id']}}"><i class="material-icons" style="font-size:24px;color:red">delete</i></a></td>{%endif%}
+                                                    {%endfor%}
+                                                {%else%}
+                                                    <td colspan="2" style="color:red; text-align:center;">No File Uploaded</td>
+                                                {%endif%}
+
+                                            </tr>
+
+                                            </tbody>
+                                        </table>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+          </div>
+        <div class="accordion space-20 container-fluid my-2" id="parent414Accordion">
+                    <button class="accordion-button" id="heading414" type="button" data-bs-toggle="collapse" data-bs-target="#collapse414" aria-expanded="false" aria-controls="collapse414">
+                        <strong>4.1.4</strong> Expenditure, excluding salary for infrastructure augmentation during last five years(INR in Lakhs)
+                    </button>
+                    <div id="collapse414" class="accordion-collapse collapse container-fluid mt-2" aria-labelledby="heading414" data-bs-parent="#parent414Accordion">
+                        <div class="accordion-body">
+                            <div class="container-fluid border" >
+                                <form action="/cri4.1.4" method="POST" enctype = "multipart/form-data">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th>Year</th>
+                                                <th>Consolidated fund allocation towards infrastructure augmentation facilities duly certified by Finance Officer/ Chartered Accountant.</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="1"><input class="form-control" id="year414" name="year414" type="text"></td>
+                                                    <td colspan="2"><input type="file" class="form-control-file border" id="doc414" name="doc414"></td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="container-fluid">
+                                        <button class="login100-form-btn w-25">SUBMIT</button>
+                                    </div>
+                                </form>
+
+                                <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th>Year</th>
+                                                <th>Consolidated fund allocation towards infrastructure augmentation facilities duly certified by Finance Officer/ Chartered Accountant.</th>
+                                                {%if seskey['type']=='admin'%}
+                                                <th>Delete</th>
+                                                {%endif%}
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+
+                                            <tr>
+                                                {%if dataset414.count()!=0%}
+                                                    {%for dataset in dataset414%}
+                                                    <td>{{dataset['year']}}</td>
+                                                    <td><a href="static/files/cri414/{{dataset.document}}" ><i class="fa fa-file-pdf-o" style="color:red;font-size:24px;"></i></a></td>
+                                                    {%if seskey['type']=='admin'%}
+                                                        <td><a href="delcri414/{{dataset['_id']}}"><i class="material-icons" style="font-size:24px;color:red">delete</i></a></td>{%endif%}
+                                                    {%endfor%}
+                                                {%else%}
+                                                    <td colspan="2" style="color:red; text-align:center;">No File Uploaded</td>
+                                                {%endif%}
+
+                                            </tr>
+
+                                            </tbody>
+                                        </table>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+          </div>
+        <div class="accordion space-20 container-fluid my-2" id="parent422Accordion">
+                    <button class="accordion-button" id="heading422" type="button" data-bs-toggle="collapse" data-bs-target="#collapse422" aria-expanded="false" aria-controls="collapse422">
+                        <strong>4.2.2</strong> Subscription for the e-resources.
+                    </button>
+                    <div id="collapse422" class="accordion-collapse collapse container-fluid mt-2" aria-labelledby="heading422" data-bs-parent="#parent422Accordion">
+                        <div class="accordion-body">
+                            <div class="container-fluid border" >
+                                <form action="/cri4.2.2" method="POST" enctype = "multipart/form-data">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th>E- resources</th>
+                                                <th>E-copy of the letter of subscription /membership in the name of HEI.<br> or <br> Screenshots of the facilities claimed with the name of HEI.</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <select class="selectpicker form-control" id="session" name="session" style="width:94px;">
+                                                            <option>Select</option>
+                                                            {%for i in ['e-journals','e-Shodh Sindhu','Shodhganga','e-books']%}
+                                                               <option>{{i}}</option>
+															{%endfor%}
+                                                        </select>
+                                                    </td>
+                                                    <td colspan="2"><input type="file" class="form-control-file border" id="doc422" name="doc422"></td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="container-fluid">
+                                        <button class="login100-form-btn w-25">SUBMIT</button>
+                                    </div>
+                                </form>
+
+                                <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th>E- resources</th>
+                                                <th>E-copy of the letter of subscription /membership in the name of HEI.<br> or <br> Screenshots of the facilities claimed with the name of HEI.</th>
+                                                {%if seskey['type']=='admin'%}
+                                                <th>Delete</th>
+                                                {%endif%}
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+
+                                            <tr>
+                                                {%if dataset422.count()!=0%}
+                                                    {%for dataset in dataset422%}
+                                                    <td>{{dataset['year']}}</td>
+                                                    <td><a href="static/files/cri422/{{dataset.document}}" ><i class="fa fa-file-pdf-o" style="color:red;font-size:24px;"></i></a></td>
+                                                    {%if seskey['type']=='admin'%}
+                                                        <td><a href="delcri422/{{dataset['_id']}}"><i class="material-icons" style="font-size:24px;color:red">delete</i></a></td>{%endif%}
+                                                    {%endfor%}
+                                                {%else%}
+                                                    <td colspan="2" style="color:red; text-align:center;">No File Uploaded</td>
+                                                {%endif%}
+
+                                            </tr>
+
+                                            </tbody>
+                                        </table>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+          </div>
+        <div class="accordion space-20 container-fluid my-2" id="parent423Accordion">
+                    <button class="accordion-button" id="heading423" type="button" data-bs-toggle="collapse" data-bs-target="#collapse423" aria-expanded="false" aria-controls="collapse423">
+                        <strong>4.2.3</strong>  annual expenditure for purchase of books/ebooks and subscription to journals/e- journals during the last five years (INR in Lakhs)
+                    </button>
+                    <div id="collapse423" class="accordion-collapse collapse container-fluid mt-2" aria-labelledby="heading423" data-bs-parent="#parent423Accordion">
+                        <div class="accordion-body">
+                            <div class="container-fluid border" >
+                                <form action="/cri4.2.3" method="POST" enctype = "multipart/form-data">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th>Session</th>
+                                                <th>Consolidated extract of expenditure for purchase of books and journals during the last five years duly attested by Head of the Institution and CA.</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <select class="selectpicker form-control" id="session423" name="session423" style="width:94px;">
+                                                            <option>Select</option>
+                                                            {%for i in ['e-journals','e-Shodh Sindhu','Shodhganga','e-books']%}
+                                                               <option>{{i}}</option>
+															{%endfor%}
+                                                        </select>
+                                                    </td>
+                                                    <td colspan="2"><input type="file" class="form-control-file border" id="doc423" name="doc423"></td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="container-fluid">
+                                        <button class="login100-form-btn w-25">SUBMIT</button>
+                                    </div>
+                                </form>
+
+                                <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th>Session</th>
+                                                <th>Consolidated extract of expenditure for purchase of books and journals during the last five years duly attested by Head of the Institution and CA.</th>
+                                                {%if seskey['type']=='admin'%}
+                                                <th>Delete</th>
+                                                {%endif%}
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+
+                                            <tr>
+                                                {%if dataset423.count()!=0%}
+                                                    {%for dataset in dataset423%}
+                                                    <td>{{dataset['session']}}</td>
+                                                    <td><a href="static/files/cri423/{{dataset.document}}" ><i class="fa fa-file-pdf-o" style="color:red;font-size:24px;"></i></a></td>
+                                                    {%if seskey['type']=='admin'%}
+                                                        <td><a href="delcri423/{{dataset['_id']}}"><i class="material-icons" style="font-size:24px;color:red">delete</i></a></td>{%endif%}
+                                                    {%endfor%}
+                                                {%else%}
+                                                    <td colspan="2" style="color:red; text-align:center;">No File Uploaded</td>
+                                                {%endif%}
+
+                                            </tr>
+
+                                            </tbody>
+                                        </table>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+          </div>
         
 
       </div>
