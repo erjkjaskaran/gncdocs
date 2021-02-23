@@ -635,19 +635,22 @@
                                             </thead>
                                             <tbody>
 
-                                            <tr>
+
                                                 {%if dataset41p.count()!=0%}
                                                     {%for dataset in dataset41p%}
+                                                <tr>
                                                     <td>{{dataset['classno']}}</td>
                                                     <td><a href="static/files/ext41/{{dataset.pic}}" ><i class="fa fa-file-pdf-o" style="color:red;font-size:24px;"></i></a></td>
                                                     {%if seskey['type']=='admin'%}
                                                         <td><a href="delext41p/{{dataset['classno']}}"><i class="material-icons" style="font-size:24px;color:red">delete</i></a></td>{%endif%}
+                                                </tr>
                                                     {%endfor%}
                                                 {%else%}
-                                                    <td colspan="2" style="color:red; text-align:center;">No File Uploaded</td>
+                                                    <tr>
+                                                    <td colspan="2" style="color:red; text-align:center;">No File Uploaded</td></tr>
                                                 {%endif%}
 
-                                            </tr>
+
 
                                             </tbody>
                                         </table>

@@ -47,19 +47,22 @@
                                             </thead>
                                             <tbody>
 
-                                            <tr>
+
                                                 {%if dataset413.count()!=0%}
                                                     {%for dataset in dataset413%}
+                                                <tr>
                                                     <td>{{dataset['classno']}}</td>
                                                     <td><a href="static/files/cri413/{{dataset.pic}}" ><i class="fa fa-file-pdf-o" style="color:red;font-size:24px;"></i></a></td>
                                                     {%if seskey['type']=='admin'%}
-                                                        <td><a href="delcri413/{{dataset['_id']}}"><i class="material-icons" style="font-size:24px;color:red">delete</i></a></td>{%endif%}
+                                                        <td><a href="delcri413/{{dataset['classno']}}"><i class="material-icons" style="font-size:24px;color:red">delete</i></a></td>{%endif%}
+                                                </tr>
                                                     {%endfor%}
                                                 {%else%}
-                                                    <td colspan="2" style="color:red; text-align:center;">No File Uploaded</td>
+                                                    <tr>
+                                                    <td colspan="2" style="color:red; text-align:center;">No File Uploaded</td></tr>
                                                 {%endif%}
 
-                                            </tr>
+
 
                                             </tbody>
                                         </table>
@@ -211,7 +214,7 @@
           </div>
         <div class="accordion space-20 container-fluid my-2" id="parent423Accordion">
                     <button class="accordion-button" id="heading423" type="button" data-bs-toggle="collapse" data-bs-target="#collapse423" aria-expanded="false" aria-controls="collapse423">
-                        <strong>4.2.3</strong>  annual expenditure for purchase of books/ebooks and subscription to journals/e- journals during the last five years (INR in Lakhs)
+                        <strong>4.2.3</strong>  Annual expenditure for purchase of books/ebooks and subscription to journals/e- journals during the last five years (INR in Lakhs)
                     </button>
                     <div id="collapse423" class="accordion-collapse collapse container-fluid mt-2" aria-labelledby="heading423" data-bs-parent="#parent423Accordion">
                         <div class="accordion-body">
@@ -230,7 +233,7 @@
                                                     <td>
                                                         <select class="selectpicker form-control" id="session423" name="session423" style="width:94px;">
                                                             <option>Select</option>
-                                                            {%for i in ['e-journals','e-Shodh Sindhu','Shodhganga','e-books']%}
+                                                            {%for i in ['2015-16','2016-17','2017-18','2018-19','2019-20','2020-21','2021-22','2022-23','2023-24', '2024-25','2025-26']%}
                                                                <option>{{i}}</option>
 															{%endfor%}
                                                         </select>
@@ -282,6 +285,177 @@
 
                     </div>
           </div>
+        <div class="accordion space-20 container-fluid my-2" id="parent424Accordion">
+                    <button class="accordion-button text-justify" id="heading424" type="button" data-bs-toggle="collapse" data-bs-target="#collapse424" aria-expanded="false" aria-controls="collapse424">
+                        <strong>4.2.4 </strong> Per day usage of library by teachers and students (Data for the latest completed academic year )
+                    </button>
+                    <div id="collapse424" class="accordion-collapse collapse container-fluid mt-2" aria-labelledby="heading424" data-bs-parent="#parent424Accordion">
+                        <div class="accordion-body">
+                            <div class="container-fluid border" >
+                                <form action="/cri4.2.4" method="POST" enctype = "multipart/form-data">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <tbody>
+                                                <tr>
+                                                    <th>Certified E-copy of the ledger for footfalls for 5 days. </th>
+                                                    <td><input class="form-control" id="ledger" name="ledger" type="file"></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Certified screenshots of the data for the same 5 days for online access</th>
+                                                    <td><input class="form-control" id="screenshot" name="screenshot" type="file"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="container-fluid pb-2">
+                                        <button class="login100-form-btn w-25">SUBMIT</button>
+                                    </div>
+                                </form>
+                                <div class="table-responsive" >
+                                   <table class="table">
+                                      <thead class="grey lighten-2">
+                                          <tr>
+                                              <th></th>
+                                              <th></th>
+    											{%if seskey['type']=='admin'%}
+                                                <th>Delete</th>{%endif%}
+                                          </tr>
+                                      </thead>
+                                      <tbody>
+                                          {% if dataset424.count() != 0 %}
+                                            {% for dataset in dataset424%}
+                                            {% if dataset.ledger%}
+                                            <tr>
+                                                <th>Certified E-copy of the ledger for footfalls for 5 days. </th>
+                                                <td><a href="static/files/cri424/{{dataset.ledger}}" ><i class="fa fa-file-pdf-o" style="color:red;font-size:24px;"></i></a></td>
+                                                {%if seskey['type']=='admin'%}
+                                                <td><a href="delcri424/{{dataset['_id']}}"><i class="material-icons" style="font-size:24px;color:red">delete</i></a></td>{%endif%}
+                                            </tr>
+                                            {%endif%}
+                                          {%if dataset.screenshot%}
+                                          <tr>
+                                             <th>Certified screenshots of the data for the same 5 days for online access</th>
+                                             <td><a href="static/files/cri424/{{dataset.screenshot}}" ><i class="fa fa-file-pdf-o" style="color:red;font-size:24px;"></i></a></td>
+                                             {%if seskey['type']=='admin'%}
+                                             <td><a href="delcri424/{{dataset['_id']}}"><i class="material-icons" style="font-size:24px;color:red">delete</i></a></td>{%endif%}
+                                          </tr>
+                                          {%endif%}
+                                          {%endfor%}
+                                          {%else%}
+                                            <tr>
+                                                <th>Certified E-copy of the ledger for footfalls for 5 days.</th>
+                                                <td colspan="7" style="color:red; text-align:center">No data uploaded</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Certified screenshots of the data for the same 5 days for online access. </th>
+                                                <td colspan="7" style="color:red; text-align:center">No data uploaded</td>
+                                            </tr>
+                                            {%endif%}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+          </div>
+        <div class="accordion space-20 container-fluid my-2" id="parent432Accordion">
+                <button class="accordion-button text-justify" id="heading432" type="button" data-bs-toggle="collapse" data-bs-target="#collapse432" aria-expanded="false" aria-controls="collapse432">
+                    <strong>4.3.2 </strong> Student – Computer ratio (Data for the latest completed academic year)
+                </button>
+                <div id="collapse432" class="accordion-collapse collapse container-fluid mt-2" aria-labelledby="heading432" data-bs-parent="#parent432Accordion">
+                    <div class="accordion-body">
+                        <div class="container-fluid border" >
+                            <form action="/cri4.3.2" method="POST" enctype = "multipart/form-data">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class="grey lighten-2">
+                                            <tr>
+                                                <th>Year</th>
+                                                <th>
+                                                    <select class="selectpicker form-control" id="year432" name="year432">
+                                                        <option>Select</option>
+                                                        {% set ls=[]%}
+                                                        {% if data432!='None'%}
+                                                            {% for data in data432 %}
+                                                                {{ls.append(data['year']|int) }}
+                                                            {%endfor%}
+                                                        {%endif%}
+                                                        {%for i in range(2015,2030)%}
+                                                            {% if i not in ls %}
+                                                                <option>{{i}}</option>
+                                                            {% endif %}
+                                                        {%endfor%}
+                                                    </select>
+                                                </th>
+
+                                            </tr>
+
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <th>Number of seats earmarked for the reserved categories</th>
+                                            <td><input class="form-control" id="noseats" name="noseats" type="text"></td>
+                                        </tr>
+                                            <tr>
+
+                                                <th>Final admission list indicating the category as published by the HEI and signed by the principal</th>
+                                                <td><input class="form-control" id="admissionlist" name="admissionlist" type="file"></td>
+
+                                            </tr>
+                                            <tr>
+                                                <th>Admission extract submitted to the state OBC, SC and ST cell every year.</th>
+                                                <td><input class="form-control" id="admissionextract" name="admissionextract" type="file"></td>
+
+                                            </tr>
+
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                                <div class="container-fluid pb-2">
+                                    <button class="login100-form-btn w-25">SUBMIT</button>
+                                </div>
+                            </form>
+
+                                <div class="table-responsive" >
+                                    <table class="table">
+                                        <thead class="grey lighten-2">
+                                            <tr>
+                                                <th>Year</th>
+                                                <th>Number of seats earmarked for the reserved categories</th>
+                                                <th>Final admission list indicating the category as published by the HEI and signed by the principal</th>
+                                                <th>Admission extract submitted to the state OBC, SC and ST cell every year.</th>
+                                                {%if seskey['type']=='admin'%}
+                                                <th>Delete</th>{%endif%}
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% if dataset432.count() != 0 %}
+                                        {% for dataset in dataset432%}
+                                            <tr>
+                                                <td>{{dataset['year']}}</td>
+                                                <td>{{dataset['noseat']}}</td>
+                                                <td><a href="static/files/cri432/{{dataset.admissionlist}}" ><i class="fa fa-file-pdf-o" style="color:red;font-size:24px;"></i></a></td>
+                                                <td><a href="static/files/cri432/{{dataset.admissionextract}}" ><i class="fa fa-file-pdf-o" style="color:red;font-size:24px;"></i></a></td>
+                                                {%if seskey['type']=='admin'%}
+                                                <td><a href="delcri432/{{dataset['_id']}}"><i class="material-icons" style="font-size:24px;color:red">delete</i></a></td>{%endif%}
+                                            </tr>
+                                        {% endfor %}
+                                        {%else%}
+                                            <tr>
+                                                <td colspan="7" style="color:red; text-align:center">No data uploaded</td>
+                                            </tr>
+                                        {%endif%}
+                                        </tbody>
+                                    </table>
+                                </div>
+
+
+                        </div>
+                    </div>
+                </div>
+          </div>
+
         
 
       </div>

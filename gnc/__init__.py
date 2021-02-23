@@ -487,12 +487,32 @@ def criteria3():
 @app.route('/criteria4')
 def criteria4():
     if session.get('name') is not None:
-        dataset413 = Database.find('cri413', {})
+        dataset413 = Database.find('ext41p', {})
         dataset414 = Database.find('cri414', {})
         dataset422 = Database.find('cri422', {})
-        return render_template("criteria4.html", seskey=session, dataset413=dataset413, dataset414=dataset414, dataset422=dataset422)
+        dataset423 = Database.find('cri423', {})
+        return render_template("criteria4.html", seskey=session, dataset413=dataset413, dataset414=dataset414, dataset422=dataset422, dataset423=dataset423)
     else:
         return redirect(url_for('login'))
+
+
+@app.route('/cri4.1.3', methods=['POST', 'GET'])
+def cri413():
+    try:
+        nc = request.form.get('classno')
+        f = request.files["doc413"]
+        f.filename = nc + ".pdf"
+        f.save(os.path.join(app.config["UPLOAD_FOLDER"], 'ext41', f.filename))
+        Database.insert("ext41p", {"id": session['name'], "classno": nc, "pic": f.filename})
+        return redirect(url_for('criteria4'))
+    except Exception as e:
+        return render_template("exception.html", e=e)
+
+
+@app.route('/delcri413/<string:id>')
+def deletecri413(id=None):
+    Database.delete_one("ext41p", {'classno': id})
+    return redirect(url_for('criteria4'))
 
 
 @app.route('/criteria5')
