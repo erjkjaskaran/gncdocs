@@ -487,11 +487,13 @@ def criteria3():
 @app.route('/criteria4')
 def criteria4():
     if session.get('name') is not None:
-        dataset413 = Database.find('ext41p', {})
+        dataset413 = Database.find('cri413', {})
         dataset414 = Database.find('cri414', {})
         dataset422 = Database.find('cri422', {})
         dataset423 = Database.find('cri423', {})
-        return render_template("criteria4.html", seskey=session, dataset413=dataset413, dataset414=dataset414, dataset422=dataset422, dataset423=dataset423)
+        dataset424 = Database.find('cri424', {})
+        dataset432 = Database.find('cri432', {})
+        return render_template("criteria4.html", seskey=session, dataset413=dataset413, dataset414=dataset414, dataset422=dataset422, dataset423=dataset423, dataset424=dataset424, dataset432=dataset432)
     else:
         return redirect(url_for('login'))
 

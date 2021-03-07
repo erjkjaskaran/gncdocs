@@ -32,7 +32,8 @@
 			{%else%}
 				<a href="/main">
 			{%endif%}
-			<img src="{{ url_for('static',filename='images/img-01.png') }}" alt="IMG" height="60px"></a>
+			<img src="{{ url_for('static',filename='images/img-01.png') }}" alt="IMG" height="60px">
+				</a>
 		</div>
 		<div class="col-sm w-75 container-fluid"><p class="w-100 container-fluid" style="text-align:center; font-size:28px; padding:5px; ">Hello {{seskey['name']}} {%if seskey['type']=='admin'%} (Admin) {%endif%}</p></div>
 		<div class="col-sm-2 float-sm-right" style="height:60px; text-align:right; "><h2 style="padding:5px 0px 0px 0px;"><a href="/logout">LOGOUT</a></h2></div>
