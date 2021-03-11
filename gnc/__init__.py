@@ -487,7 +487,7 @@ def criteria3():
 @app.route('/criteria4')
 def criteria4():
     if session.get('name') is not None:
-        dataset413 = Database.find('cri413', {})
+        dataset413 = Database.find('ext41p', {})
         dataset414 = Database.find('cri414', {})
         dataset422 = Database.find('cri422', {})
         dataset423 = Database.find('cri423', {})
@@ -503,7 +503,7 @@ def cri413():
     try:
         nc = request.form.get('classno')
         f = request.files["doc413"]
-        f.filename = nc + ".pdf"
+        f.filename = nc + ".jpeg"
         f.save(os.path.join(app.config["UPLOAD_FOLDER"], 'ext41', f.filename))
         Database.insert("ext41p", {"id": session['name'], "classno": nc, "pic": f.filename})
         return redirect(url_for('criteria4'))
@@ -514,6 +514,44 @@ def cri413():
 @app.route('/delcri413/<string:id>')
 def deletecri413(id=None):
     Database.delete_one("ext41p", {'classno': id})
+    return redirect(url_for('criteria4'))
+
+
+@app.route('/cri4.1.4', methods=['POST', 'GET'])
+def cri414():
+    try:
+        nc = request.form.get('year414')
+        f = request.files["doc414"]
+        f.filename = nc + ".pdf"
+        f.save(os.path.join(app.config["UPLOAD_FOLDER"], 'cri414', f.filename))
+        Database.insert("cri414", {"_id": "" + uuid.uuid4().hex, "id": session['name'], "year": nc, "document": f.filename})
+        return redirect(url_for('criteria4'))
+    except Exception as e:
+        return render_template("exception.html", e=e)
+
+
+@app.route('/delcri414/<string:id>')
+def deletecri414(id=None):
+    Database.delete_one("cri414", {'_id': id})
+    return redirect(url_for('criteria4'))
+
+
+@app.route('/cri4.2.2', methods=['POST', 'GET'])
+def cri422():
+    try:
+        nc = request.form.get('year422')
+        f = request.files["doc422"]
+        f.filename = nc + ".pdf"
+        f.save(os.path.join(app.config["UPLOAD_FOLDER"], 'cri422', f.filename))
+        Database.insert("cri422", {"_id": "" + uuid.uuid4().hex, "id": session['name'], "year": nc, "document": f.filename})
+        return redirect(url_for('criteria4'))
+    except Exception as e:
+        return render_template("exception.html", e=e)
+
+
+@app.route('/delcri422/<string:id>')
+def deletecri422(id=None):
+    Database.delete_one("cri422", {'_id': id})
     return redirect(url_for('criteria4'))
 
 
@@ -751,7 +789,7 @@ def ext41p():
     try:
         nc = request.form.get('classno')
         f = request.files["doc41p"]
-        f.filename = nc + ".pdf"
+        f.filename = nc + ".jpeg"
         f.save(os.path.join(app.config["UPLOAD_FOLDER"], 'ext41', f.filename))
         Database.insert("ext41p", {"id": session['name'], "classno": nc, "pic": f.filename})
         return redirect(url_for('extprof'))
