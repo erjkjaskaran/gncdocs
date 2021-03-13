@@ -555,6 +555,56 @@ def deletecri422(id=None):
     return redirect(url_for('criteria4'))
 
 
+@app.route('/cri4.2.4', methods=['POST', 'GET'])
+def cri424():
+    try:
+        f1 = request.files["ledger"]
+        f1.filename = "ledger.pdf"
+        f1.save(os.path.join(app.config["UPLOAD_FOLDER"], 'cri424', f1.filename))
+        Database.insert("cri424",
+                        {"_id": "" + uuid.uuid4().hex, "id": session['name'], "ledger": f1.filename})
+
+        f2 = request.files["screenshot"]
+        f2.filename = "screenshot.pdf"
+        f2.save(os.path.join(app.config["UPLOAD_FOLDER"], 'cri424', f2.filename))
+        Database.insert("cri424",
+                        {"_id": "" + uuid.uuid4().hex, "id": session['name'], "screenshot": f2.filename})
+        return redirect(url_for('criteria4'))
+    except Exception as e:
+        return render_template("exception.html", e=e)
+
+
+@app.route('/delcri424/<string:id>', methods=['POST', 'GET'])
+def deletecri424(id=None):
+    Database.delete_one("cri424", {'_id': id})
+    return redirect(url_for('criteria4'))
+
+
+@app.route('/cri4.3.2', methods=['POST', 'GET'])
+def cri432():
+    try:
+        y = request.form.get('year432')
+        ns = request.form.get('noseats')
+        f1 = request.files["admissionlist"]
+        f1.filename = "admissionlist_" + y + ".pdf"
+        f1.save(os.path.join(app.config["UPLOAD_FOLDER"], 'cri432', f1.filename))
+        f2 = request.files["admissionextract"]
+        f2.filename = "admissionextract_" + y + ".pdf"
+        f2.save(os.path.join(app.config["UPLOAD_FOLDER"], 'cri432', f2.filename))
+        Database.insert("cri432",
+                        {"_id": "" + uuid.uuid4().hex, "id": session['name'], "year": y, "noseat": ns,
+                         "admissionlist": f1.filename, "admissionextract": f2.filename})
+        return redirect(url_for('criteria4'))
+    except Exception as e:
+        return render_template("exception.html", e=e)
+
+
+@app.route('/delcri432/<string:id>', methods=['POST', 'GET'])
+def deletecri432(id=None):
+    Database.delete_one("cri432", {'_id': id})
+    return redirect(url_for('criteria4'))
+
+
 @app.route('/criteria5')
 def criteria5():
     if session['name'] is None:
@@ -883,7 +933,21 @@ def criterion1():
 
 @app.route('/criterion2')
 def criterion2():
-    return render_template("criterion2.html", seskey=session)
+    dataset211 = Database.find('cri211', {})
+    dataset212a = Database.find('cri212a', {})
+    dataset212b = Database.find('cri212b', {})
+    data212b = Database.find('cri212b', {})
+    dataset222 = Database.find('cri222', {})
+    dataset233 = Database.find('cri233', {})
+    dataset233b = Database.find('cri233b', {})
+    dataset241 = Database.find('cri241', {})
+    dataset242 = Database.find('cri242', {})
+    dataset243 = Database.find('cri243', {})
+    dataset263 = Database.find('cri263', {})
+    return render_template("criterion2.html", dataset211=dataset211, dataset212a=dataset212a,
+                           dataset212b=dataset212b, data212b=data212b, dataset222=dataset222, dataset233=dataset233,
+                           dataset233b=dataset233b, dataset241=dataset241, dataset242=dataset242, dataset243=dataset243,
+                           dataset263=dataset263)
 
 
 @app.route('/criterion3')

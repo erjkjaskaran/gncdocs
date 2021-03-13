@@ -4,7 +4,433 @@
     <div class="limiter">
       <div class="container-login100">
 
-        <div class="space-20"> This is Criterion 2: Teaching- Learning and Evaluation </div>
+          <div class="accordion space-20 container-fluid my-2" id="parent211Accordion">
+                    <button class="accordion-button text-justify" id="heading211" type="button" data-bs-toggle="collapse" data-bs-target="#collapse211" aria-expanded="false" aria-controls="collapse211">
+                        <strong>2.1.1</strong> Enrolment of students in last five years.
+                    </button>
+                    <div id="collapse211" class="accordion-collapse collapse container-fluid mt-2" aria-labelledby="heading211" data-bs-parent="#parent211Accordion">
+                        <div class="accordion-body">
+                            <div class="container-fluid border" >
+                                    <div class="table-responsive" >
+                                        <table class="table">
+                                            <thead class="grey lighten-2">
+                                                <tr>
+                                                    <th>Year</th>
+                                                    <th>Program Name</th>
+                                                    <th>Program Code</th>
+													<th>Number of seats Sanctioned</th>
+                                                    <th>Number of students admitted</th>
+                                                    <th>Upload Document related to Sanction of intake from affiliating University</th>
+                                                    <th>Upload Approved admission list year-wise/ program-wise from the affiliating university.</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% if dataset211.count() != 0 %}
+                                            {% for dataset in dataset211%}
+                                                <tr>
+                                                    <td>{{dataset['year']}}</td>
+                                                    <td>{{dataset['programname']}}</td>
+                                                    <td>{{dataset['programcode']}}</td>
+                                                    <td>{{dataset['seatsanctioned']}}</td>
+                                                    <td>{{dataset['studentadmitted']}}</td>
+                                                    <td><a href="static/files/cri211/{{dataset.sanction}}" ><i class="fa fa-file-pdf-o" style="color:red;font-size:24px;"></i></a></td>
+                                                    <td><a href="static/files/cri211/{{dataset.admitted}}" ><i class="fa fa-file-pdf-o" style="color:red;font-size:24px;"></i></a></td>
+                                                    {%if seskey['type']=='admin'%}
+                                                    <td><a href="delcri211/{{dataset['_id']}}"><i class="material-icons" style="font-size:24px;color:red">delete</i></a></td>{%endif%}
+                                                </tr>
+                                            {% endfor %}
+                                            {%else%}
+                                                <tr>
+                                                    <td colspan="7" style="color:red; text-align:center">No data uploaded</td>
+                                                </tr>
+                                            {%endif%}
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+          </div>
+          <div class="accordion space-20 container-fluid my-2" id="parent212aAccordion">
+                    <button class="accordion-button text-justify" id="heading212a" type="button" data-bs-toggle="collapse" data-bs-target="#collapse212a" aria-expanded="false" aria-controls="collapse212a">
+                        <strong>2.1.2 (a)</strong> Seats filled against seats reserved for various categories (SC, ST, OBC, Divyangjan, etc. as per applicable reservation policy during the last five years
+                    </button>
+                    <div id="collapse212a" class="accordion-collapse collapse container-fluid mt-2" aria-labelledby="heading212a" data-bs-parent="#parent212aAccordion">
+                        <div class="accordion-body">
+                            <div class="container-fluid border" >
+                                    <div class="table-responsive" >
+                                        <table class="table">
+
+                                            <tbody>
+
+                                                <tr>
+                                                    <th>Copy of letter issued by state govt. or Central Government indicating the reserved categories to be considered as per the state rule</th>
+                                                    {% if dataset212a.count() != 0 %}
+                                                    {% for dataset in dataset212a%}
+                                                    <td><a href="static/files/cri212a/{{dataset.stategovt}}" ><i class="fa fa-file-pdf-o" style="color:red;font-size:24px;"></i></a></td>
+
+                                                    {% endfor %}
+                                                    {%else%}
+                                                    <td style="color:red; text-align:center">No data uploaded</td>
+                                                    {%endif%}
+
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+          </div>
+          <div class="accordion space-20 container-fluid my-2" id="parent212bAccordion">
+                    <button class="accordion-button text-justify" id="heading212b" type="button" data-bs-toggle="collapse" data-bs-target="#collapse212b" aria-expanded="false" aria-controls="collapse212b">
+                        <strong>2.1.2 (b)</strong> Seats filled against seats reserved for various categories (SC, ST, OBC, Divyangjan, etc. as per applicable reservation policy during the last five years
+                    </button>
+                    <div id="collapse212b" class="accordion-collapse collapse container-fluid mt-2" aria-labelledby="heading212b" data-bs-parent="#parent212bAccordion">
+                        <div class="accordion-body">
+                            <div class="container-fluid border" >
+                                    <div class="table-responsive" >
+                                        <table class="table">
+                                            <thead class="grey lighten-2">
+                                                <tr>
+                                                    <th>Year</th>
+                                                    <th>Number of seats earmarked for the reserved categories</th>
+                                                    <th>Final admission list indicating the category as published by the HEI and signed by the principal</th>
+                                                    <th>Admission extract submitted to the state OBC, SC and ST cell every year.</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% if dataset212b.count() != 0 %}
+                                            {% for dataset in dataset212b%}
+                                                <tr>
+                                                    <td>{{dataset['year']}}</td>
+                                                    <td>{{dataset['noseat']}}</td>
+                                                    <td><a href="static/files/cri212b/{{dataset.admissionlist}}" ><i class="fa fa-file-pdf-o" style="color:red;font-size:24px;"></i></a></td>
+                                                    <td><a href="static/files/cri212b/{{dataset.admissionextract}}" ><i class="fa fa-file-pdf-o" style="color:red;font-size:24px;"></i></a></td>
+
+                                                </tr>
+                                            {% endfor %}
+                                            {%else%}
+                                                <tr>
+                                                    <td colspan="7" style="color:red; text-align:center">No data uploaded</td>
+                                                </tr>
+                                            {%endif%}
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+          </div>
+          <div class="accordion space-20 container-fluid my-2" id="parent222Accordion">
+                    <button class="accordion-button text-justify" id="heading222" type="button" data-bs-toggle="collapse" data-bs-target="#collapse222" aria-expanded="false" aria-controls="collapse222">
+                        <strong>2.2.2</strong> Student- Full time teacher ratio (Data for the latest completed academic year)
+                    </button>
+                    <div id="collapse222" class="accordion-collapse collapse container-fluid mt-2" aria-labelledby="heading222" data-bs-parent="#parent222Accordion">
+                        <div class="accordion-body">
+                            <div class="container-fluid border" >
+                                    <div class="table-responsive" >
+                                        <table class="table">
+
+                                            <tbody>
+                                            {% if dataset222.count() != 0 %}
+                                            {% for dataset in dataset222%}
+                                            {% if dataset.listteacher%}
+                                            <tr>
+                                                <th>Certified list of full time teachers along with the departmental affiliation in the latest completed academic year.</th>
+                                                <td><a href="static/files/cri222/{{dataset.listteacher}}" ><i class="fa fa-file-pdf-o" style="color:red;font-size:24px;"></i></a></td>
+
+                                            </tr>
+                                            {%endif%}
+                                            {%if dataset.liststudent%}
+                                            <tr>
+                                                <th>List showing the number of students across all year in each of the programs in the latest completed academic year.</th>
+                                                <td><a href="static/files/cri222/{{dataset.liststudent}}" ><i class="fa fa-file-pdf-o" style="color:red;font-size:24px;"></i></a></td>
+
+                                            </tr>
+                                            {%endif%}
+                                            {%endfor%}
+                                            {%else%}
+                                            <tr>
+                                                <th>Certified list of full time teachers along with the departmental affiliation in the latest completed academic year.</th>
+                                                <td colspan="7" style="color:red; text-align:center">No data uploaded</td>
+                                            </tr>
+                                            <tr>
+                                                <th>List showing the number of students across all year in each of the programs in the latest completed academic year.</th>
+                                                <td colspan="7" style="color:red; text-align:center">No data uploaded</td>
+                                            </tr>
+                                            {%endif%}
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+          </div>
+          <div class="accordion space-20 container-fluid my-2" id="parent233Accordion">
+                    <button class="accordion-button text-justify" id="heading233" type="button" data-bs-toggle="collapse" data-bs-target="#collapse233" aria-expanded="false" aria-controls="collapse233">
+                        <strong>2.3.3 (a) </strong> Ratio of mentor to students for academic and other related issues (Data for the latest completed academic year )
+                    </button>
+                    <div id="collapse233" class="accordion-collapse collapse container-fluid mt-2" aria-labelledby="heading233" data-bs-parent="#parent233Accordion">
+                        <div class="accordion-body">
+                            <div class="container-fluid border" >
+                                <div class="table-responsive" >
+                                   <table class="table">
+
+                                      <tbody>
+                                          {% if dataset233.count() != 0 %}
+                                            {% for dataset in dataset233%}
+                                            {% if dataset.mentormentee%}
+                                            <tr>
+                                                <th>Copy of circular pertaining the details of mentor and their allotted mentees.</th>
+                                                <td><a href="static/files/cri233/{{dataset.mentormentee}}" ><i class="fa fa-file-pdf-o" style="color:red;font-size:24px;"></i></a></td>
+
+                                            </tr>
+                                            {%endif%}
+                                          {%if dataset.listmentor%}
+                                          <tr>
+                                             <th>Approved Mentor list as announced by the HEI</th>
+                                             <td><a href="static/files/cri233/{{dataset.listmentor}}" ><i class="fa fa-file-pdf-o" style="color:red;font-size:24px;"></i></a></td>
+
+                                          </tr>
+                                          {%endif%}
+                                          {%endfor%}
+                                          {%else%}
+                                            <tr>
+                                                <th>Copy of circular pertaining the details of mentor and their allotted mentees.</th>
+                                                <td colspan="7" style="color:red; text-align:center">No data uploaded</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Approved Mentor list as announced by the HEI</th>
+                                                <td colspan="7" style="color:red; text-align:center">No data uploaded</td>
+                                            </tr>
+                                            {%endif%}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+          </div>
+          <div class="accordion space-20 container-fluid my-2" id="parent233bAccordion">
+                    <button class="accordion-button text-justify" id="heading233b" type="button" data-bs-toggle="collapse" data-bs-target="#collapse233b" aria-expanded="false" aria-controls="collapse233b">
+                        <strong>2.3.3 (b)</strong> Ratio of mentor to students for academic and other related issues (Data for the latest completed academic year )
+                    </button>
+                    <div id="collapse233b" class="accordion-collapse collapse container-fluid mt-2" aria-labelledby="heading233b" data-bs-parent="#parent233bAccordion">
+                        <div class="accordion-body">
+                            <div class="container-fluid border" >
+                                <div class="table-responsive" >
+                                   <table class="table">
+                                      <thead class="grey lighten-2">
+                                          <tr>
+                                              <th>Name of the mentor</th>
+                                              <th>Issues raised and resolved</th>
+
+                                          </tr>
+                                      </thead>
+                                      <tbody>
+                                          {% if dataset233b.count() != 0 %}
+                                            {% for dataset in dataset233b%}
+                                            <tr>
+                                                <td></td>
+                                                <td><a href="static/files/cri233b/{{dataset.mentormentee}}" ><i class="fa fa-file-pdf-o" style="color:red;font-size:24px;"></i></a></td>
+
+                                            </tr>
+                                            {%endfor%}
+                                          {%else%}
+                                            <tr>
+                                                <td colspan="7" style="color:red; text-align:center">No data uploaded</td>
+                                            </tr>
+                                            {%endif%}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+          </div>
+          <div class="accordion space-20 container-fluid my-2" id="parent241Accordion">
+                    <button class="accordion-button text-justify" id="heading241" type="button" data-bs-toggle="collapse" data-bs-target="#collapse241" aria-expanded="false" aria-controls="collapse241">
+                        <strong>2.4.1  </strong> Average percentage of full time teachers against sanctioned posts during the last five years.
+                    </button>
+                    <div id="collapse241" class="accordion-collapse collapse container-fluid mt-2" aria-labelledby="heading241" data-bs-parent="#parent241Accordion">
+                        <div class="accordion-body">
+                            <div class="container-fluid border" >
+                                <div class="table-responsive" >
+                                   <table class="table">
+
+                                      <tbody>
+                                          {% if dataset241.count() != 0 %}
+                                            {% for dataset in dataset241%}
+                                            {% if dataset.sanctionpost%}
+                                            <tr>
+                                                <th>Sanction letters indicating number of posts (including Management sanctioned posts) by competent authority.</th>
+                                                <td><a href="static/files/cri241/{{dataset.sanctionpost}}" ><i class="fa fa-file-pdf-o" style="color:red;font-size:24px;"></i></a></td>
+
+                                            </tr>
+                                            {%endif%}
+                                          {%if dataset.listfulltime%}
+                                          <tr>
+                                             <th>List of full time teachers appointed along with their departmental affiliation.</th>
+                                             <td><a href="static/files/cri241/{{dataset.listfulltime}}" ><i class="fa fa-file-pdf-o" style="color:red;font-size:24px;"></i></a></td>
+
+                                          </tr>
+                                          {%endif%}
+                                          {%endfor%}
+                                          {%else%}
+                                            <tr>
+                                                <th>Sanction letters indicating number of posts (including Management sanctioned posts) by competent authority.</th>
+                                                <td colspan="7" style="color:red; text-align:center">No data uploaded</td>
+                                            </tr>
+                                            <tr>
+                                                <th>List of full time teachers appointed along with their departmental affiliation.</th>
+                                                <td colspan="7" style="color:red; text-align:center">No data uploaded</td>
+                                            </tr>
+                                            {%endif%}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+          </div>
+          <div class="accordion space-20 container-fluid my-2" id="parent242Accordion">
+                    <button class="accordion-button text-justify" id="heading242" type="button" data-bs-toggle="collapse" data-bs-target="#collapse242" aria-expanded="false" aria-controls="collapse242">
+                        <strong>2.4.2 </strong> Full time teachers with Ph. D./ D.M./ M.Ch./ D.N.B Superspeciality/ D.Sc./ D.Litt. during the last five years
+                    </button>
+                    <div id="collapse242" class="accordion-collapse collapse container-fluid mt-2" aria-labelledby="heading242" data-bs-parent="#parent242Accordion">
+                        <div class="accordion-body">
+                            <div class="container-fluid border" >
+                                    <div class="table-responsive" >
+                                        <table class="table">
+                                            <thead class="grey lighten-2">
+                                                <tr>
+                                                    <th class="w-25">Name of faculty</th>
+                                                    <th class="w-25">Qualification (Ph. D. / D.M. / M.Ch. / D.N.B Superspeciality / D.Sc. / D.Litt)</th>
+                                                    <th class="w-25">Year of Award</th>
+                                                    <th class="w-25">Certificate</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% if dataset242.count() != 0 %}
+                                            {% for dataset in dataset242%}
+                                                <tr>
+                                                    <td>{{dataset['session']}}</td>
+                                                    <td>{{dataset['facultyname']}}</td>
+                                                    <td>{{dataset['qualification']}}</td>
+                                                    <td>{{dataset['yearaward']}}</td>
+                                                    <td><a href="static/files/cri242/{{dataset.document}}" ><i class="fa fa-file-pdf-o" style="color:red;font-size:24px;"></i></a></td>
+
+                                                </tr>
+                                            {% endfor %}
+                                            {%else%}
+                                                <tr>
+                                                    <td colspan="7" style="color:red; text-align:center">No data uploaded</td>
+                                                </tr>
+                                            {%endif%}
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+          </div>
+          <div class="accordion space-20 container-fluid my-2" id="parent243Accordion">
+                    <button class="accordion-button text-justify" id="heading243" type="button" data-bs-toggle="collapse" data-bs-target="#collapse243" aria-expanded="false" aria-controls="collapse243">
+                        <strong>2.4.3 </strong>  Teaching experience of full time teachers in the same institution (Data for the latest completed academic year in number of years).
+                    </button>
+                    <div id="collapse243" class="accordion-collapse collapse container-fluid mt-2" aria-labelledby="heading243" data-bs-parent="#parent243Accordion">
+                        <div class="accordion-body">
+                            <div class="container-fluid border" >
+                                    <div class="table-responsive" >
+                                        <table class="table">
+                                            <thead class="grey lighten-2">
+                                                <tr>
+                                                    <th class="w-25">Name of faculty</th>
+                                                    <th class="w-25">Date of Appointment</th>
+                                                    <th class="w-25">Experience in the Institution</th>
+                                                    <th class="w-25">Appointment Letter/ Experience Certificate</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% if dataset243.count() != 0 %}
+                                            {% for dataset in dataset243%}
+                                                <tr>
+                                                    <td>{{dataset['facultyname']}}</td>
+                                                    <td>{{dataset['dateofappointment']}}</td>
+                                                    <td>{{dataset['experience']}}</td>
+                                                    <td><a href="static/files/cri243/{{dataset.document}}" ><i class="fa fa-file-pdf-o" style="color:red;font-size:24px;"></i></a></td>
+
+                                                </tr>
+                                            {% endfor %}
+                                            {%else%}
+                                                <tr>
+                                                    <td colspan="7" style="color:red; text-align:center">No data uploaded</td>
+                                                </tr>
+                                            {%endif%}
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+          </div>
+          <div class="accordion space-20 container-fluid my-2" id="parent263Accordion">
+                    <button class="accordion-button text-justify" id="heading263" type="button" data-bs-toggle="collapse" data-bs-target="#collapse263" aria-expanded="false" aria-controls="collapse263">
+                        <strong>2.6.3</strong> Ratio of mentor to students for academic and other related issues (Data for the latest completed academic year )
+                    </button>
+                    <div id="collapse263" class="accordion-collapse collapse container-fluid mt-2" aria-labelledby="heading263" data-bs-parent="#parent263Accordion">
+                        <div class="accordion-body">
+                            <div class="container-fluid border" >
+                                <div class="table-responsive" >
+                                   <table class="table">
+                                      <thead class="grey lighten-2">
+                                          <tr>
+                                              <th>Year</th>
+                                              <th>Program Name</th>
+                                              <th>Result sheet published by the affiliating university attested by the principal.</th>
+
+                                          </tr>
+                                      </thead>
+                                      <tbody>
+                                          {% if dataset263.count() != 0 %}
+                                            {% for dataset in dataset263%}
+                                            <tr>
+                                                <td>{{dataset['year']}}</td>
+                                                <td>{{dataset['programname']}}</td>
+                                                <td><a href="static/files/cri263/{{dataset.result}}" ><i class="fa fa-file-pdf-o" style="color:red;font-size:24px;"></i></a></td>
+
+                                            </tr>
+                                            {%endfor%}
+                                          {%else%}
+                                            <tr>
+                                                <td colspan="7" style="color:red; text-align:center">No data uploaded</td>
+                                            </tr>
+                                            {%endif%}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+          </div>
 
       </div>
 
