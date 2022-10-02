@@ -8,7 +8,7 @@ class Database(object):
     @staticmethod
     def initialize():
         client = pymongo.MongoClient(Database.URI)
-        Database.DATABASE = client['dbgncdocs']
+        Database.DATABASE = client["dbgncdocs"]
 
     @staticmethod
     def insert(collection, data):
