@@ -10,7 +10,7 @@ from gnc.models.useradmin import UserAdmin
 
 app = Flask(__name__)
 app.secret_key = "gnc1966"
-app.config['UPLOAD_FOLDER'] = "c:/users/erjkj/pycharmprojects/gncdocs/gnc/static/files"
+app.config['UPLOAD_FOLDER'] = "/Users/jaskaran/PycharmProjects/gncdocs/gnc/static/files"
 
 
 @app.route('/login')
@@ -122,8 +122,10 @@ def admin_validate():
         try:
             email = request.form['email']
             password = request.form['pass']
+            print(password)
             admin = UserAdmin.login_validate(email, password)
             if admin is not None:
+                print("abc")
                 UserAdmin.login(admin)
                 session.permanent = True
                 app.permanent_session_lifetime = timedelta(minutes=10)
