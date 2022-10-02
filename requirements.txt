@@ -1,4 +1,4 @@
 pymongo[srv]
 Flask==2.1.0
 Flask-Pymongo
-Werkzeug~=1.0.1
+Werkzeug~=2.0
