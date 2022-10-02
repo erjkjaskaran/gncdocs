@@ -26,7 +26,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            {% if dataset211.count_documents() != 0 %}
+                                            {% if dataset211.count_documents({}) != 0 %}
                                             {% for dataset in dataset211%}
                                                 <tr>
                                                     <td>{{dataset['year']}}</td>
@@ -68,7 +68,7 @@
 
                                                 <tr>
                                                     <th>Copy of letter issued by state govt. or Central Government indicating the reserved categories to be considered as per the state rule</th>
-                                                    {% if dataset212a.count_documents() != 0 %}
+                                                    {% if dataset212a.count_documents({}) != 0 %}
                                                     {% for dataset in dataset212a%}
                                                     <td><a href="static/files/cri212a/{{dataset.stategovt}}" ><i class="fa fa-file-pdf-o" style="color:red;font-size:24px;"></i></a></td>
 
@@ -107,7 +107,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            {% if dataset212b.count_documents() != 0 %}
+                                            {% if dataset212b.count_documents({}) != 0 %}
                                             {% for dataset in dataset212b%}
                                                 <tr>
                                                     <td>{{dataset['year']}}</td>
@@ -142,7 +142,7 @@
                                         <table class="table">
 
                                             <tbody>
-                                            {% if dataset222.count_documents() != 0 %}
+                                            {% if dataset222.count_documents({}) != 0 %}
                                             {% for dataset in dataset222%}
                                             {% if dataset.listteacher%}
                                             <tr>
@@ -189,7 +189,7 @@
                                    <table class="table">
 
                                       <tbody>
-                                          {% if dataset233.count_documents() != 0 %}
+                                          {% if dataset233.count_documents({}) != 0 %}
                                             {% for dataset in dataset233%}
                                             {% if dataset.mentormentee%}
                                             <tr>
@@ -240,7 +240,7 @@
                                           </tr>
                                       </thead>
                                       <tbody>
-                                          {% if dataset233b.count_documents() != 0 %}
+                                          {% if dataset233b.count_documents({}) != 0 %}
                                             {% for dataset in dataset233b%}
                                             <tr>
                                                 <td></td>
@@ -271,7 +271,7 @@
                                    <table class="table">
 
                                       <tbody>
-                                          {% if dataset241.count_documents() != 0 %}
+                                          {% if dataset241.count_documents({}) != 0 %}
                                             {% for dataset in dataset241%}
                                             {% if dataset.sanctionpost%}
                                             <tr>
@@ -324,7 +324,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            {% if dataset242.count_documents() != 0 %}
+                                            {% if dataset242.count_documents({}) != 0 %}
                                             {% for dataset in dataset242%}
                                                 <tr>
                                                     <td>{{dataset['session']}}</td>
@@ -368,7 +368,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            {% if dataset243.count_documents() != 0 %}
+                                            {% if dataset243.count_documents({}) != 0 %}
                                             {% for dataset in dataset243%}
                                                 <tr>
                                                     <td>{{dataset['facultyname']}}</td>
@@ -410,7 +410,7 @@
                                           </tr>
                                       </thead>
                                       <tbody>
-                                          {% if dataset263.count_documents() != 0 %}
+                                          {% if dataset263.count_documents({}) != 0 %}
                                             {% for dataset in dataset263%}
                                             <tr>
                                                 <td>{{dataset['year']}}</td>

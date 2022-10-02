@@ -21,7 +21,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            {% if dataset113.count_documents() != 0 %}
+                                            {% if dataset113.count_documents({}) != 0 %}
                                             {% for dataset in dataset113%}
                                                 <tr>
                                                     <td>{{dataset['year']}}</td>
@@ -66,7 +66,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            {% if dataset132.count_documents() != 0 %}
+                                            {% if dataset132.count_documents({}) != 0 %}
                                             {% for dataset in dataset132%}
                                                 <tr>
                                                     <td>{{dataset['year']}}</td>
@@ -111,7 +111,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            {% if dataset133.count_documents() != 0 %}
+                                            {% if dataset133.count_documents({}) != 0 %}
                                             {% for dataset in dataset133%}
                                                 <tr>
                                                     <td>{{dataset['nameofprogram']}}</td>
