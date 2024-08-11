@@ -25,7 +25,7 @@
 
 
                                             <tbody>
-                                            {%if dataset2.count_documents({})!=0%}
+                                            {%if count2  > 0%}
                                             {% for dataset in dataset2%}
                                                 <tr>
                                                     <td>{{dataset['pcode']}}</td>
@@ -43,7 +43,7 @@
                                             {%endif%}
                                             <tr>
                                                 <td colspan="4">List of Courses specified on Letter Head duly signed by Principal</td>
-                                                {%if data11.count_documents({})!=0%}
+                                                {%if count11>0%}
                                                     {%for data in data11%}
                                                     <td colspan="1" style="text-align:center"><a href="static/files/ext11/{{data.file}}" ><i class="fa fa-file-pdf-o" style="color:red;font-size:24px;"></i></a></td>
 
@@ -54,7 +54,7 @@
                                             </tr>
                                             <tr>
                                                 <td colspan="4">List of Programmes specified on Letter Head duly signed by Principal</td>
-                                                {%if data12.count_documents({})!=0%}
+                                                {%if count12>=0%}
                                                     {%for data in data12%}
                                                     <td colspan="1" style="text-align:center"><a href="static/files/ext12/{{data.file}}" ><i class="fa fa-file-pdf-o" style="color:red;font-size:24px;"></i></a></td>
 
@@ -88,7 +88,7 @@
                                                     </tr>
                                             </thead>
                                             <tbody>
-                                            {% if dataset21.count_documents({})!=0 %}
+                                            {% if count21>0 %}
                                             {% for dataset in dataset21%}
                                                 <tr>
                                                     <td>{{dataset['year']}}</td>
@@ -129,8 +129,8 @@
                                                 </tr>
                                         </thead>
                                         <tbody>
-                                        {% if dataset.count_documents({}) != 0 %}
-                                        {% for dataset in dataset%}
+                                        {% if count> 0 %}
+                                        {% for document in dataset%}
                                             <tr>
                                                 <td>{{dataset['year']}}</td>
                                                 <td>{{dataset['numberseat']}}</td>
@@ -167,8 +167,8 @@
                                                     </tr>
                                             </thead>
                                             <tbody>
-                                            {% if dataset23.count_documents({}) != 0 %}
-                                            {% for dataset in dataset23%}
+                                            {% if count23> 0 %}
+                                            {% for document in dataset23%}
                                                 <tr>
                                                     <td>{{dataset['year']}}</td>
                                                     <td>{{dataset['numberseat']}}</td>
@@ -207,8 +207,8 @@
                                                     </tr>
                                             </thead>
                                             <tbody>
-                                            {% if dataset31.count_documents({})!=0 %}
-                                            {% for dataset in dataset31%}
+                                            {% if count31>0 %}
+                                            {% for document in dataset31%}
                                                 <tr>
                                                     <td>{{dataset['year']}}</td>
                                                     <td>{{dataset['numberpost']}}</td>
@@ -248,8 +248,8 @@
                                                     </tr>
                                             </thead>
                                             <tbody>
-                                            {% if dataset1.count_documents({})!=0 %}
-                                            {% for dataset in dataset1%}
+                                            {% if count1>0 %}
+                                            {% for document in dataset1%}
                                                 <tr>
                                                     <td>{{dataset['year']}}</td>
                                                     <td>{{dataset['numberpost']}}</td>
@@ -289,8 +289,8 @@
                                                     </tr>
                                             </thead>
                                             <tbody>
-                                            {%if dataset41.count_documents({})!=0%}
-                                            {% for dataset in dataset41%}
+                                            {%if count41>0%}
+                                            {% for document in dataset41%}
 
                                                 <tr>
                                                     <td>{{dataset['noclass']}}</td>
@@ -324,8 +324,8 @@
                                             <tbody>
 
                                             <tr>
-                                                {%if dataset41p.count_documents({})!=0%}
-                                                    {%for dataset in dataset41p%}
+                                                {%if count41p%}
+                                                    {%for document in dataset41p%}
                                                     <td>{{dataset['classno']}}</td>
                                                     <td><a href="static/files/ext41/{{dataset.pic}}" ><i class="fa fa-file-pdf-o" style="color:red;font-size:24px;"></i></a></td>
 
@@ -363,7 +363,7 @@
                                                     </tr>
                                             </thead>
                                             <tbody>
-                                            {% if dataset42.count_documents({})!=0 %}
+                                            {% if count42>0 %}
                                             {% for dataset in dataset42%}
                                                 <tr>
                                                     <td>{{dataset['year']}}</td>
@@ -403,7 +403,7 @@
                                                     </tr>
                                             </thead>
                                             <tbody>
-                                            {% if dataset43.count_documents({})!=0 %}
+                                            {% if count43>0 %}
                                             {% for dataset in dataset43%}
                                                 <tr>
                                                     <td>{{dataset['nocomputer']}}</td>

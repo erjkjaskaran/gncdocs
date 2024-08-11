@@ -10,7 +10,7 @@ from gnc.models.useradmin import UserAdmin
 
 app = Flask(__name__)
 app.secret_key = "gnc1966"
-app.config['UPLOAD_FOLDER'] = "/Users/jaskaran/PycharmProjects/gncdocs/gnc/static/files"
+app.config['UPLOAD_FOLDER'] = "/Users/jaskaran/Projects/python/gnc/static/files"
 
 
 @app.route('/login')
@@ -37,28 +37,40 @@ def main():
 @app.route('/extendprofile')
 def extendprofile():
     data11 = Database.find("ext11f", {})
+    count11=Database.count("ext11")
     data12 = Database.find("ext12f", {})
+    count12=Database.count("ext12f")
     data = Database.find("ext22", {})
     dataset = Database.find("ext22", {})
+    count=Database.count("ext22")
     data1 = Database.find("ext32", {})
     dataset1 = Database.find("ext32", {})
+    count1=Database.count("ext32")
     dataset2 = Database.find("ext11", {})
+    count2 = Database.count("extf11")
     data21 = Database.find("ext21", {})
     data31 = Database.find("ext31", {})
     data23 = Database.find("ext23", {})
     dataset21 = Database.find("ext21", {})
+    count21=Database.count("ext21")
     dataset23 = Database.find("ext23", {})
+    count23=Database.count("ext23")
     dataset31 = Database.find("ext31", {})
+    count31=Database.count("ext31")
     dataset41 = Database.find("ext41", {})
+    count41=Database.count("ext41")
     dataset41p = Database.find("ext41p", {})
+    count41p=Database.count("ext41p")
     dataset42 = Database.find("ext42", {})
+    count42=Database.count("ext42")
     data42 = Database.find("ext42", {})
     dataset43 = Database.find("ext43", {})
+    count43=Database.count("ext43")
     return render_template("extendprofile.html", seskey=session, dataset=dataset, dataset1=dataset1, data=data,
                            data1=data1, dataset2=dataset2, data11=data11, dataset21=dataset21, data21=data21,
                            data31=data31, dataset31=dataset31, data23=data23, dataset23=dataset23, dataset41=dataset41,
-                           dataset41p=dataset41p, data12=data12, dataset42=dataset42, data42=data42,
-                           dataset43=dataset43)
+                           dataset41p=dataset41p, data12=data12, dataset42=dataset42, data42=data42,count11=count11,count12=count12,
+                           dataset43=dataset43,count2=count2,count=count,count43=count43,count42=count42,count41p=count41p,count41=count41,count31=count31,count21=count21,count23=count23,count1=count1)
 
 
 @app.route('/auth/register', methods=['post'])
@@ -75,12 +87,14 @@ def faculty_register():
 @app.route('/main', methods=['post', 'get'])
 def login_validate():
     if session.get('name') is not None:
-        print("ABC")
         return render_template("dashboard.html", seskey=session)
     else:
         try:
             email = request.form['email']
+            print(email)
             if email is not None:
+                print(email)
+                print("hi")
                 password = request.form['pass']
                 session['name'] = User.login_validate(email, password)
 
@@ -122,15 +136,16 @@ def admin_validate():
         try:
             email = request.form['email']
             password = request.form['pass']
-            print(password)
-            admin = UserAdmin.login_validate(email, password)
+            admin = User.login_validate(email, password)
             if admin is not None:
-                print("abc")
+                print("here")
                 UserAdmin.login(admin)
                 session.permanent = True
                 app.permanent_session_lifetime = timedelta(minutes=10)
                 session.modified = True
+                print("abc1")
                 g.user = flask_login.current_user
+                print("abc2")
                 return redirect(url_for('admindashboard'))
             else:
                 session['name'] = None
@@ -138,6 +153,7 @@ def admin_validate():
                 error = 'Invalid Password'
                 return render_template('/adminlogin', error=error)
         except Exception as e:
+            print("exception")
             return render_template("exception.html", e=e)
 
 
@@ -636,6 +652,7 @@ def extprof():
     try:
         if session.get('name') is not None:
             data11 = Database.find("ext11f", {})
+            print(data11)
             data12 = Database.find("ext12f", {})
             data = Database.find("ext22", {})
             dataset = Database.find("ext22", {"id": session['name']})

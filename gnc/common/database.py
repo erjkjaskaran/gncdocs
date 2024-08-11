@@ -2,8 +2,9 @@ import pymongo
 
 
 class Database(object):
-    URI = f'mongodb+srv://root:root@cluster0.4fnhrtj.mongodb.net/?retryWrites=true&w=majority'
+    URI = 'mongodb://127.0.0.1:27017/dbgncdocs'
     DATABASE = None
+    COLLECTION = None
 
     @staticmethod
     def initialize():
@@ -25,3 +26,7 @@ class Database(object):
     @staticmethod
     def delete_one(collection, query):
         Database.DATABASE[collection].delete_one(query)
+
+    @staticmethod
+    def count(collection):
+        return Database.DATABASE[collection].count_documents({})
